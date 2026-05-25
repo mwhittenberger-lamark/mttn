@@ -26,6 +26,7 @@ const services = [
 	{
 		icon: 'laptop',
 		title: 'Websites & Landing Pages',
+		href: '/services/websites-landing-pages/',
 		description:
 			'Modern websites and landing pages built to explain what you do, build trust, and turn visitors into leads or customers.',
 		tags: ['Custom Design', 'Mobile-First', 'SEO Ready'],
@@ -33,6 +34,7 @@ const services = [
 	{
 		icon: 'bot',
 		title: 'Custom AI & Automation',
+		href: '/services/custom-ai-automation/',
 		description:
 			'AI tools that solve real business problems, save time, and help you do more without hiring a full team.',
 		tags: ['AI Workflows', 'Chatbots', 'Integrations'],
@@ -40,12 +42,14 @@ const services = [
 	{
 		icon: 'code',
 		title: 'Apps & Digital Tools',
+		href: '/services/apps-digital-tools/',
 		description: 'Custom tools and web apps that solve real business problems.',
 		tags: ['Dashboards', 'Portals', 'Internal Tools'],
 	},
 	{
 		icon: 'search',
 		title: 'Paid Media & SEO',
+		href: '/services/paid-media-seo/',
 		description:
 			'Focused traffic strategies that help people find you when they are searching, comparing, or ready to buy.',
 		tags: ['Google Ads', 'Local SEO', 'Reporting'],
@@ -53,6 +57,7 @@ const services = [
 	{
 		icon: 'mail',
 		title: 'Lifecycle & Email Marketing',
+		href: '/services/lifecycle-email-marketing/',
 		description:
 			'Email systems that help you follow up, nurture leads, recover opportunities, and stay in front of customers.',
 		tags: ['Automations', 'Segmentation', 'Retention'],
@@ -60,6 +65,7 @@ const services = [
 	{
 		icon: 'line-chart',
 		title: 'CRO & Digital Strategy',
+		href: '/services/cro-digital-strategy/',
 		description:
 			'A clear look at where your digital presence is leaking attention, trust, leads, or revenue.',
 		tags: ['Audits', 'Testing', 'Optimization'],
@@ -183,6 +189,41 @@ const processSteps = [
 	],
 ];
 
+const portfolioItems = [
+	{
+		name: 'Hustle Butter',
+		platform: 'Shopify',
+		url: 'https://www.hustlebutter.com/',
+		logo: '/portfolio-logos/hustle-butter.svg',
+		logoAlt: 'Hustle Butter logo',
+		description: 'Ecommerce brand experience built around product storytelling and conversion.',
+	},
+	{
+		name: 'Diadem',
+		platform: 'Shopify',
+		url: 'https://diademsports.com/',
+		logo: '/portfolio-logos/diadem.avif',
+		logoAlt: 'Diadem logo',
+		description: 'Brand-forward ecommerce experience for a growing sports and equipment company.',
+	},
+	{
+		name: 'Hot Cruise Alerts',
+		platform: 'WordPress Integration',
+		url: 'https://hotcruisealerts.com/',
+		logo: '/portfolio-logos/hot-cruise-alerts.png',
+		logoAlt: 'Hot Cruise Alerts logo',
+		description: 'Content and offer-driven travel site with custom WordPress-connected functionality.',
+	},
+	{
+		name: 'Chirocare of Florida',
+		platform: 'WordPress',
+		url: 'https://chirocareflorida.com/',
+		logo: '/portfolio-logos/chirocare.svg',
+		logoAlt: 'Chirocare of Florida logo',
+		description: 'Local healthcare site focused on clarity, trust, and patient acquisition.',
+	},
+];
+
 const faqItems = [
 	[
 		'Do you only work with businesses in North Carolina?',
@@ -218,7 +259,7 @@ const socialLinks = [
 	},
 	{
 		label: 'LinkedIn',
-		href: 'https://www.linkedin.com/in/michael-whittenberger-8a52016/',
+		href: 'https://www.linkedin.com/in/mike-ninja-413545411',
 		icon: 'linkedin',
 	},
 	{
@@ -421,7 +462,7 @@ const structuredData = String.raw`{
         ]
       },
       "sameAs": [
-        "https://www.linkedin.com/in/michael-whittenberger-8a52016/",
+        "https://www.linkedin.com/in/mike-ninja-413545411",
         "https://www.facebook.com/YOUR_PROFILE_HERE",
         "https://www.instagram.com/YOUR_PROFILE_HERE"
       ]
@@ -702,7 +743,7 @@ const structuredData = String.raw`{
 			<nav class="site-nav" id="site-nav">
 				<div class="container nav-inner">
 					<a class="brand" href="#top">
-						<img src={logoSrc} alt="Mike the Tech Ninja" />
+						<img src={logoSrc} alt="Mike the Tech Ninja logo" />
 						<span>Mike the Tech Ninja</span>
 					</a>
 
@@ -734,6 +775,8 @@ const structuredData = String.raw`{
 		<main>
 			<section class="hero" id="top">
 				<div class="hero-bg"></div>
+				<div class="hero-pattern hero-pattern-grid" aria-hidden="true"></div>
+				<div class="hero-pattern hero-pattern-contour" aria-hidden="true"></div>
 				<div class="floating-orb orb-left"></div>
 				<div class="floating-orb orb-right"></div>
 				<div class="container hero-grid">
@@ -842,18 +885,33 @@ const structuredData = String.raw`{
 							analytics, and AI-powered workflows.
 						</p>
 					</div>
+					<p class="intro-business-types">
+						Local service businesses <span aria-hidden="true">&bull;</span> Health and wellness practices
+						<span aria-hidden="true">&bull;</span> Professional services <span aria-hidden="true">&bull;</span>
+						Retail and ecommerce brands <span aria-hidden="true">&bull;</span> Restaurants and hospitality
+						businesses <span aria-hidden="true">&bull;</span> Creators and side hustles
+					</p>
 						<a class="button primary intro-cta" href="#contact" data-lead-trigger="Intro CTA">Let's Grow Your Business</a>
 				</div>
 			</section>
 
 			<section class="section problems">
 				<div class="container">
-						<div class="section-head narrow">
-							<h2>Small businesses are being asked to compete like big businesses.</h2>
-							<p>
-								Customers expect a fast website, clear messaging, easy booking or buying, helpful follow-up,
-								search visibility, and marketing that feels relevant.
-							</p>
+						<div class="problem-intro">
+							<div class="section-head narrow">
+								<h2>Small businesses are being asked to compete like big businesses.</h2>
+								<p>
+									Customers expect a fast website, clear messaging, easy booking or buying, helpful follow-up,
+									search visibility, and marketing that feels relevant.
+								</p>
+							</div>
+							<div class="problem-visual">
+								<img
+									src="/small-business-hero.webp"
+									alt="Triangle small business owner using website, SEO, email marketing, booking, and digital growth tools"
+									loading="lazy"
+								/>
+							</div>
 						</div>
 
 						<div class="problem-wrap">
@@ -886,7 +944,7 @@ const structuredData = String.raw`{
 
 					<div class="service-grid">
 						{services.map((service) => (
-							<article class="service-card">
+							<a class="service-card" href={service.href}>
 								<div class="service-icon">
 									<img class="inline-icon icon-dark" src={`/icons/${service.icon}.svg`} alt="" aria-hidden="true" />
 								</div>
@@ -895,7 +953,11 @@ const structuredData = String.raw`{
 								<div class="tag-list">
 									{service.tags.map((tag) => <span>{tag}</span>)}
 								</div>
-							</article>
+								<div class="service-card__cta">
+									<span>Learn more</span>
+									<img class="inline-icon icon-blue" src="/icons/arrow-right.svg" alt="" aria-hidden="true" />
+								</div>
+							</a>
 						))}
 						</div>
 					</div>
@@ -986,7 +1048,9 @@ const structuredData = String.raw`{
 					<div class="package-grid">
 						{packages.map((pkg) => (
 							<article class:list={['package-card', pkg.highlighted && 'highlighted']}>
+								<p class="package-eyebrow">{pkg.eyebrow}</p>
 								<h3>{pkg.title}</h3>
+								<p class="package-best-for">{pkg.bestFor}</p>
 								<p>{pkg.description}</p>
 								<div class="package-price">{pkg.price}</div>
 									<button
@@ -1005,7 +1069,7 @@ const structuredData = String.raw`{
 				<section class="section about">
 				<div class="container about-inner">
 					<div class="about-logo">
-						<img src={logoSrc} alt="Mike the Tech Ninja" />
+						<img src={logoSrc} alt="Mike the Tech Ninja logo" />
 					</div>
 					<div class="about-copy">
 						<h2>Meet Mike, your local Tech Ninja</h2>
@@ -1023,6 +1087,31 @@ const structuredData = String.raw`{
 							business, your customers, and the opportunities hiding in plain sight.
 						</p>
 						<a class="button primary about-cta" href="#contact" data-lead-trigger="About CTA">Let's Talk About What's Possible</a>
+					</div>
+					<div class="about-work">
+						<div class="section-head center">
+							<h3>Selected Work</h3>
+							<p>A few examples of brands and businesses I have helped build or support.</p>
+						</div>
+						<div class="portfolio-grid">
+							{portfolioItems.map((item) => (
+								<a
+									class="portfolio-card"
+									href={item.url}
+									target="_blank"
+									rel="noreferrer"
+									aria-label={`Open ${item.name} in a new tab`}
+								>
+									<div class="portfolio-logo-wrap">
+										<img src={item.logo} alt={item.logoAlt} class="portfolio-logo" loading="lazy" />
+									</div>
+									<p class="portfolio-platform">{item.platform}</p>
+									<h3>{item.name}</h3>
+									<p>{item.description}</p>
+									<span class="portfolio-link">Visit Site</span>
+								</a>
+							))}
+						</div>
 					</div>
 				</div>
 			</section>
@@ -1104,7 +1193,7 @@ const structuredData = String.raw`{
 				<footer class="site-footer">
 				<div class="container footer-inner">
 					<div class="footer-brand">
-						<img src={logoSrc} alt="Mike the Tech Ninja" />
+						<img src={logoSrc} alt="Mike the Tech Ninja logo" />
 						<div>
 							<div class="footer-title">Mike the Tech Ninja</div>
 							<div class="footer-subtitle">Serving the Triangle, NC</div>

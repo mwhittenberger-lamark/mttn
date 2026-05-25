@@ -1,0 +1,1174 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const logoSrc = '/mike%20the%20tech%20ninja%20logo%202026.png';
+const currentYear = new Date().getFullYear();
+
+const fixes = [
+	'A clearer homepage',
+	'A better landing page',
+	'A stronger offer',
+	'A working follow-up system',
+	'A local SEO cleanup',
+	'A simple AI tool that saves hours',
+	'Tracking that shows what is actually happening',
+	'A paid traffic plan that does not waste budget',
+];
+
+const reviewCards = [
+	[
+		'Your website',
+		'Is it clear, modern, fast, trustworthy, and built to convert?',
+	],
+	[
+		'Your traffic',
+		'Are people finding you through search, ads, social, referrals, or not enough of anything?',
+	],
+	[
+		'Your follow-up',
+		'Are leads and customers being nurtured after they first contact you?',
+	],
+	[
+		'Your AI opportunities',
+		'Where could AI save time, answer questions, create content, organize knowledge, or improve customer response?',
+	],
+	[
+		'Your budget leverage',
+		'Which move is most likely to create progress without overspending?',
+	],
+];
+
+const serviceItems = [
+	'Websites and landing pages',
+	'Custom AI tools and automations',
+	'Paid media and campaign strategy',
+	'SEO and local search',
+	'Lifecycle and email marketing',
+	'Conversion optimization',
+	'Analytics and tracking',
+	'Digital and AI strategy',
+];
+
+const faqItems = [
+	[
+		'Is the Digital Gut Check really free?',
+		'Yes. It is a short, practical conversation to identify where your digital presence may be underperforming and what you could do next.',
+	],
+	[
+		'Will you try to sell me a big package?',
+		'No. The goal is to identify the right next move for your business and budget. Sometimes that is a small fix. Sometimes it is a larger project. The recommendation should fit the situation.',
+	],
+	[
+		'Can you meet in person?',
+		'For businesses in the Triangle, yes, when it makes sense.',
+	],
+	[
+		'What if I do not know what I need?',
+		'That is normal. The call is designed to help figure that out.',
+	],
+	[
+		'How long is the Digital Gut Check?',
+		'It is designed to be a focused 30-minute conversation. Long enough to identify the biggest issues, short enough to stay practical.',
+	],
+	[
+		'Do I need to prepare anything before the call?',
+		'Not much. It helps to have your website, any active marketing efforts, and your biggest frustration in mind, but you do not need a formal brief.',
+	],
+	[
+		'What kinds of businesses is this best for?',
+		'It is best for small and medium businesses that need clearer digital priorities, better lead flow, stronger websites, smarter follow-up, or more efficient marketing.',
+	],
+	[
+		'Can you help if I already have a website or marketing person?',
+		'Yes. Sometimes the best use of the Gut Check is to identify the missing pieces, technical bottlenecks, or strategy gaps in an existing setup.',
+	],
+	[
+		'Will I get actual recommendations after the call?',
+		'Yes. The point is to leave you with a clearer sense of what to fix first, what can wait, and what is most likely to move the business forward.',
+	],
+	[
+		'What happens if we decide to work together?',
+		'If it makes sense, I will recommend the next step, whether that is a focused project, a tune-up, ongoing support, or simply a few actions you can take on your own first.',
+	],
+];
+
+const structuredData = JSON.stringify({
+	'@context': 'https://schema.org',
+	'@graph': [
+		{
+			'@type': 'WebPage',
+			'@id': 'https://whoisthetechninja.com/free-digital-gut-check/#webpage',
+			url: 'https://whoisthetechninja.com/free-digital-gut-check/',
+			name: 'Free Digital Gut Check for Triangle Small Businesses | Mike the Tech Ninja',
+			description:
+				'Get a free Digital Gut Check from Mike the Tech Ninja. Practical website, AI, SEO, paid media, and marketing advice for small businesses in Raleigh, Cary, Durham, and the Triangle.',
+			inLanguage: 'en-US',
+		},
+		{
+			'@type': 'FAQPage',
+			'@id': 'https://whoisthetechninja.com/free-digital-gut-check/#faq',
+			mainEntity: faqItems.map(([question, answer]) => ({
+				'@type': 'Question',
+				name: question,
+				acceptedAnswer: {
+					'@type': 'Answer',
+					text: answer,
+				},
+			})),
+		},
+	],
+});
+---
+
+<Layout
+	title="Free Digital Gut Check for Triangle Small Businesses | Mike the Tech Ninja"
+	description="Get a free Digital Gut Check from Mike the Tech Ninja. Practical website, AI, SEO, paid media, and marketing advice for small businesses in Raleigh, Cary, Durham, and the Triangle."
+	canonical="https://whoisthetechninja.com/free-digital-gut-check/"
+	robots="index, follow, max-image-preview:large"
+	ogType="website"
+	ogSiteName="Mike the Tech Ninja"
+	ogTitle="Free Digital Gut Check for Triangle Small Businesses"
+	ogDescription="Get a free Digital Gut Check from Mike the Tech Ninja and find out which website, marketing, AI, or SEO improvements could make the biggest difference for your business."
+	ogUrl="https://whoisthetechninja.com/free-digital-gut-check/"
+	ogImage="https://whoisthetechninja.com/images/mike-the-tech-ninja-og.jpg"
+	ogImageAlt="Mike the Tech Ninja logo and small business digital strategy branding"
+	twitterCard="summary_large_image"
+	twitterTitle="Free Digital Gut Check for Triangle Small Businesses"
+	twitterDescription="Practical website, AI, SEO, paid media, and marketing advice for Triangle small businesses."
+	twitterImage="https://whoisthetechninja.com/images/mike-the-tech-ninja-og.jpg"
+	structuredData={structuredData}
+>
+	<div class="landing-shell">
+		<header class="landing-topbar">
+			<div class="container landing-topbar__inner">
+				<a class="landing-brand" href="/">
+					<img src={logoSrc} alt="Mike the Tech Ninja logo" />
+					<span>Mike the Tech Ninja</span>
+				</a>
+				<a class="button primary small" href="#gut-check-form">Book My Free Digital Gut Check</a>
+			</div>
+		</header>
+
+		<main>
+			<section class="gut-hero">
+				<div class="gut-hero__grid container">
+					<div class="gut-hero__copy">
+						<p class="gut-eyebrow">For Triangle Small and Medium Business Owners</p>
+						<h1>
+							Your business may be leaving
+							<span class="gut-highlight">money, leads,</span>
+							and
+							<span class="gut-highlight">time</span>
+							on the table.
+						</h1>
+						<p class="gut-lede">
+							Get a free Digital Gut Check from Mike the Tech Ninja and find out which website,
+							marketing, AI, or SEO improvements could make the biggest difference for your business.
+						</p>
+						<div class="gut-hero__actions">
+							<a class="button primary" href="#gut-check-form">Book My Free Digital Gut Check</a>
+							<p class="gut-trust-line">Local to the Triangle. Practical advice. No agency pressure.</p>
+						</div>
+						<div class="gut-audience">
+							<span>Raleigh</span>
+							<span>Cary</span>
+							<span>Durham</span>
+							<span>Chapel Hill</span>
+							<span>Apex</span>
+							<span>Triangle small businesses</span>
+						</div>
+					</div>
+
+					<div class="gut-form-card" id="gut-check-form">
+						<p class="gut-form-card__eyebrow">Free 30-minute review</p>
+						<h2>Book your Digital Gut Check</h2>
+						<p>
+							Tell me a little about the business and what you want to improve. I will follow up
+							personally.
+						</p>
+
+						<form class="gut-form" id="paid-landing-form">
+							<input type="hidden" name="source" value="Paid Landing Page" />
+							<div class="gut-form__pane is-active" data-form-step="1">
+								<div class="gut-form__grid gut-form__grid--two">
+									<label>
+										<span>First name</span>
+										<input type="text" name="first_name" autocomplete="given-name" required />
+									</label>
+									<label>
+										<span>Last name</span>
+										<input type="text" name="last_name" autocomplete="family-name" required />
+									</label>
+								</div>
+								<div class="gut-form__grid gut-form__grid--two">
+									<label>
+										<span>Business name</span>
+										<input type="text" name="business_name" autocomplete="organization" required />
+									</label>
+									<label>
+										<span>Website URL</span>
+										<input type="url" name="website_url" placeholder="https://example.com" />
+									</label>
+								</div>
+								<div class="gut-form__grid gut-form__grid--two">
+									<label>
+										<span>Email</span>
+										<input type="email" name="email" autocomplete="email" required />
+									</label>
+									<label>
+										<span>Phone</span>
+										<input type="tel" name="phone" autocomplete="tel" required />
+									</label>
+								</div>
+								<div class="gut-form__actions">
+									<button class="button primary gut-form__next" type="button" data-step-next>
+										Next Step
+									</button>
+								</div>
+							</div>
+							<div class="gut-form__pane" data-form-step="2" hidden>
+								<fieldset class="gut-form__fieldset">
+									<legend>What do you need help with?</legend>
+									<div class="gut-check-grid">
+										<label><input type="checkbox" name="help_with" value="Website" /> <span>Website</span></label>
+										<label><input type="checkbox" name="help_with" value="AI" /> <span>AI</span></label>
+										<label><input type="checkbox" name="help_with" value="Paid Ads" /> <span>Paid Ads</span></label>
+										<label><input type="checkbox" name="help_with" value="SEO" /> <span>SEO</span></label>
+										<label><input type="checkbox" name="help_with" value="Email Marketing" /> <span>Email Marketing</span></label>
+										<label><input type="checkbox" name="help_with" value="Strategy" /> <span>Strategy</span></label>
+										<label><input type="checkbox" name="help_with" value="Not Sure" /> <span>Not Sure</span></label>
+									</div>
+								</fieldset>
+								<label>
+									<span>Approximate monthly or project budget</span>
+									<select name="budget">
+										<option value="">Select a range</option>
+										<option>Under $500</option>
+										<option>$500-$1,500</option>
+										<option>$1,500-$5,000</option>
+										<option>$5,000+</option>
+										<option>Not sure yet</option>
+									</select>
+								</label>
+								<label>
+									<span>What is the biggest thing you want to improve?</span>
+									<textarea name="biggest_improvement" rows="4" required></textarea>
+								</label>
+								<div class="gut-form__actions">
+									<button class="button secondary" type="button" data-step-back>Back</button>
+									<button class="button primary gut-form__submit" type="submit">Schedule My Free Gut Check</button>
+								</div>
+							</div>
+							<p class="gut-form__note">
+								No pressure. No bloated proposal. Just a clear conversation about what would help most.
+							</p>
+							<p class="gut-form__error" id="paid-landing-error" hidden>
+								That did not go through. Please try again in a moment.
+							</p>
+						</form>
+
+						<div class="gut-success" id="paid-landing-success" hidden>
+							<p class="gut-success__eyebrow">Request received</p>
+							<h3>Your Digital Gut Check request is in.</h3>
+							<p>
+								I have your details and will follow up soon with the next step.
+							</p>
+							<p>In the meantime, check out the blog for practical tips on websites, AI, SEO, and smarter digital growth.</p>
+							<div class="gut-success__actions">
+								<a class="button secondary" href="/blog/">Browse the Blog</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="gut-section gut-pain">
+				<div class="container gut-pain__grid">
+					<div class="gut-pain__copy">
+						<p class="gut-section__eyebrow">You are probably closer than you think</p>
+						<h2>Most businesses do not need a full rebuild. They need smarter sequencing.</h2>
+						<p class="gut-section__intro">
+							Most small businesses do not need to tear everything down and start over. They usually
+							need a few <span class="gut-inline-accent gut-inline-accent--green">smart fixes</span>.
+							The problem is knowing which fix comes first.
+						</p>
+						<div class="gut-fix-grid">
+							{fixes.map((item) => (
+								<div class="gut-fix-item">{item}</div>
+							))}
+						</div>
+						<p class="gut-section__closing">That is what the Digital Gut Check is for.</p>
+					</div>
+					<div class="gut-pain__visual">
+						<img
+							src="/smarter-businesses.webp"
+							alt="Small business digital growth plan showing smarter website, trust, conversion, and follow-up sequencing"
+							loading="lazy"
+						/>
+					</div>
+				</div>
+			</section>
+
+			<section class="gut-section gut-review">
+				<div class="container">
+					<div class="gut-section-head">
+						<p class="gut-section__eyebrow">What we will look at together</p>
+						<h2>We will review the digital pieces that actually affect growth.</h2>
+					</div>
+					<div class="gut-review-grid">
+						{reviewCards.map(([title, description]) => (
+							<article class="gut-review-card">
+								<h3>{title}</h3>
+								<p>{description}</p>
+							</article>
+						))}
+					</div>
+				</div>
+			</section>
+
+			<section class="gut-section gut-local">
+				<div class="container gut-local__grid">
+					<div>
+						<p class="gut-section__eyebrow">Local to the Triangle</p>
+						<h2>A local digital expert who can actually visit your business.</h2>
+						<p>
+							If you are in Raleigh, Cary, Apex, Durham, Chapel Hill, or nearby, you do not have to
+							explain your business to a faceless vendor across the country.
+						</p>
+						<p>
+							I can meet in person, see how your business works, understand your customer experience,
+							and help build a realistic digital plan around your goals and budget.
+						</p>
+					</div>
+					<div class="gut-local__card">
+						<p class="gut-local__label">Best fit for:</p>
+						<ul>
+							<li>Local service businesses</li>
+							<li>Med spas, dentists, chiropractors, and wellness clinics</li>
+							<li>Professional services</li>
+							<li>Restaurants and local retail</li>
+							<li>Triangle small business owners who need a smarter next move</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+
+			<section class="gut-section gut-services">
+				<div class="container">
+					<div class="gut-services__panel">
+						<img
+							src="/services.webp"
+							alt="Small business digital services including websites, AI automation, SEO, email marketing, paid media, and conversion strategy"
+							class="gut-services__image"
+							loading="lazy"
+						/>
+						<div class="gut-services__overlay">
+							<p class="gut-section__eyebrow">Services snapshot</p>
+							<h2>If it touches digital growth, I can probably help.</h2>
+							<div class="gut-service-list">
+								{serviceItems.map((item) => <span>{item}</span>)}
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="gut-section gut-offer">
+				<div class="container gut-offer__panel">
+					<div>
+						<p class="gut-section__eyebrow">Free 30-minute Digital Gut Check</p>
+						<h2>Talk through what is frustrating you and what is likely worth fixing first.</h2>
+						<p>
+							We will talk about your business, what you have already tried, and where the best
+							opportunities may be hiding. You will leave with
+							<span class="gut-inline-accent gut-inline-accent--blue">practical next steps</span> whether we work
+							together or not.
+						</p>
+					</div>
+					<div class="gut-offer__actions">
+						<a class="button primary" href="#gut-check-form">Schedule My Free Gut Check</a>
+						<p>No pressure. No bloated proposal. Just a clear conversation about what would help most.</p>
+					</div>
+				</div>
+			</section>
+
+			<section class="gut-section gut-faq">
+				<div class="container gut-section__narrow">
+					<p class="gut-section__eyebrow">FAQ</p>
+						<h2>Questions you may have before booking.</h2>
+					<div class="gut-faq-list">
+						{faqItems.map(([question, answer]) => (
+							<details class="gut-faq-item">
+								<summary>
+									<span>{question}</span>
+									<img src="/icons/chevron-down.svg" alt="" aria-hidden="true" class="gut-faq-chevron" />
+								</summary>
+								<p>{answer}</p>
+							</details>
+						))}
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<footer class="landing-footer">
+			<div class="container landing-footer__inner">
+				<p>Mike the Tech Ninja</p>
+				<p>Websites, AI, SEO, paid media, email marketing, CRO, and strategy for Triangle small businesses.</p>
+				<p>&copy; {currentYear} Mike the Tech Ninja. All rights reserved.</p>
+			</div>
+		</footer>
+	</div>
+
+	<script src="/scripts/paid-landing.js" defer></script>
+</Layout>
+
+<style>
+	.landing-shell {
+		background:
+			radial-gradient(circle at top left, rgba(37, 99, 235, 0.08), transparent 24%),
+			linear-gradient(180deg, #fff 0%, #f8fafc 100%);
+	}
+
+	.landing-topbar {
+		position: sticky;
+		top: 0;
+		z-index: 40;
+		border-bottom: 1px solid var(--color-border);
+		background: rgba(255, 255, 255, 0.94);
+		backdrop-filter: blur(14px);
+	}
+
+	.landing-topbar__inner {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 20px;
+		min-height: 68px;
+	}
+
+	.landing-brand {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		font-family: 'Sora', sans-serif;
+		font-size: 0.98rem;
+		font-weight: 700;
+	}
+
+	.landing-brand img {
+		width: 38px;
+		height: 38px;
+		object-fit: contain;
+	}
+
+	.landing-topbar__inner .button {
+		flex: 0 0 auto;
+	}
+
+	.gut-hero {
+		position: relative;
+		overflow: hidden;
+		padding: 56px 0 48px;
+	}
+
+	.gut-hero::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background:
+			linear-gradient(rgba(11, 11, 11, 0.035) 1px, transparent 1px),
+			linear-gradient(90deg, rgba(11, 11, 11, 0.035) 1px, transparent 1px);
+		background-size: 40px 40px;
+		mask-image: linear-gradient(135deg, rgba(0, 0, 0, 0.72), transparent 78%);
+		opacity: 0.4;
+		pointer-events: none;
+	}
+
+	.gut-hero__grid {
+		position: relative;
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(340px, 470px);
+		gap: 28px;
+		align-items: start;
+	}
+
+	.gut-eyebrow,
+	.gut-section__eyebrow,
+	.gut-form-card__eyebrow,
+	.gut-success__eyebrow {
+		margin: 0 0 14px;
+		font-family: 'Sora', sans-serif;
+		font-size: 0.78rem;
+		font-weight: 700;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		color: var(--color-blue);
+	}
+
+	.gut-hero h1 {
+		max-width: 12ch;
+		font-size: clamp(2.3rem, 4.7vw, 4rem);
+		line-height: 1.02;
+		letter-spacing: -0.05em;
+	}
+
+	.gut-highlight {
+		color: var(--color-green);
+	}
+
+	.gut-lede {
+		max-width: 640px;
+		margin-top: 18px;
+		font-size: 1.18rem;
+		line-height: 1.6;
+		color: #475569;
+	}
+
+	.gut-hero__actions {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 16px;
+		margin-top: 28px;
+	}
+
+	.gut-trust-line {
+		font-size: 0.98rem;
+		font-weight: 600;
+		color: var(--color-black);
+	}
+
+	.gut-audience {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+		margin-top: 28px;
+	}
+
+	.gut-audience span,
+	.gut-service-list span,
+	.gut-check-grid span {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 8px 12px;
+		border-radius: 999px;
+		background: rgba(255, 255, 255, 0.92);
+		border: 1px solid var(--color-border);
+		color: var(--color-black);
+		font-size: 0.84rem;
+		font-weight: 600;
+	}
+
+	.gut-form-card {
+		padding: 22px;
+		border: 1px solid rgba(37, 99, 235, 0.16);
+		border-radius: 24px;
+		background: rgba(255, 255, 255, 0.95);
+		box-shadow: 0 24px 54px rgba(11, 11, 11, 0.08);
+		backdrop-filter: blur(18px);
+	}
+
+	.gut-form-card h2,
+	.gut-section h2 {
+		font-size: clamp(2rem, 3vw, 3rem);
+		line-height: 1.08;
+		letter-spacing: -0.04em;
+	}
+
+	.gut-form-card p {
+		margin-top: 10px;
+		font-size: 0.96rem;
+		line-height: 1.5;
+	}
+
+	.gut-form {
+		margin-top: 18px;
+	}
+
+	.gut-form__pane {
+		display: grid;
+		gap: 0;
+	}
+
+	.gut-form__pane[hidden] {
+		display: none !important;
+	}
+
+	.gut-form__grid {
+		display: grid;
+		gap: 12px;
+	}
+
+	.gut-form__grid--two {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.gut-form label,
+	.gut-form__fieldset {
+		display: grid;
+		gap: 6px;
+		margin: 0 0 12px;
+	}
+
+	.gut-form span,
+	.gut-form legend {
+		font-family: 'Sora', sans-serif;
+		font-size: 0.86rem;
+		font-weight: 600;
+		line-height: 1.35;
+		color: var(--color-black);
+	}
+
+	.gut-form input,
+	.gut-form select,
+	.gut-form textarea {
+		width: 100%;
+		padding: 12px 14px;
+		border: 1px solid rgba(11, 11, 11, 0.12);
+		border-radius: 14px;
+		background: rgba(248, 250, 252, 0.9);
+		color: var(--color-black);
+	}
+
+	.gut-form textarea {
+		line-height: 1.5;
+	}
+
+	.gut-form input:focus,
+	.gut-form select:focus,
+	.gut-form textarea:focus {
+		outline: 2px solid rgba(37, 99, 235, 0.18);
+		border-color: rgba(37, 99, 235, 0.32);
+	}
+
+	.gut-form__fieldset {
+		padding: 0;
+		border: 0;
+	}
+
+	.gut-check-grid {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+	}
+
+	.gut-check-grid label {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		margin: 0;
+		padding: 7px 11px;
+		border: 1px solid var(--color-border);
+		border-radius: 999px;
+		background: rgba(248, 250, 252, 0.92);
+		cursor: pointer;
+	}
+
+	.gut-check-grid input {
+		width: 16px;
+		height: 16px;
+		margin: 0;
+		padding: 0;
+	}
+
+	.gut-form__submit {
+		margin-top: 6px;
+	}
+
+	.gut-form__actions {
+		display: flex;
+		justify-content: space-between;
+		gap: 12px;
+		margin-top: 6px;
+	}
+
+	.gut-form__actions .button {
+		flex: 1 1 0;
+	}
+
+	.gut-form__note,
+	.gut-form__error {
+		margin-top: 14px;
+		font-size: 0.92rem;
+	}
+
+	.gut-form__error {
+		color: #b91c1c;
+	}
+
+	.gut-success {
+		padding: 22px;
+		margin-top: 24px;
+		border-radius: 18px;
+		background: linear-gradient(180deg, rgba(37, 99, 235, 0.08), rgba(163, 230, 53, 0.08));
+		border: 1px solid rgba(37, 99, 235, 0.14);
+	}
+
+	.gut-success h3 {
+		font-size: 1.35rem;
+	}
+
+	.gut-success__actions {
+		display: flex;
+		gap: 12px;
+		margin-top: 16px;
+	}
+
+	.gut-inline-accent {
+		font-weight: 700;
+	}
+
+	.gut-inline-accent--blue {
+		color: var(--color-blue);
+	}
+
+	.gut-inline-accent--green {
+		color: var(--color-green);
+	}
+
+	.gut-section {
+		padding: 68px 0;
+	}
+
+	.gut-section__eyebrow {
+		position: relative;
+		display: inline-flex;
+		align-items: center;
+		gap: 10px;
+	}
+
+	.gut-section__eyebrow::after {
+		content: '';
+		width: 34px;
+		height: 2px;
+		border-radius: 999px;
+		background: linear-gradient(90deg, var(--color-blue), var(--color-green));
+	}
+
+	.gut-section__narrow {
+		max-width: 940px;
+	}
+
+	.gut-section__intro,
+	.gut-section__closing {
+		max-width: 720px;
+		font-size: 1.08rem;
+		line-height: 1.7;
+	}
+
+	.gut-section__closing {
+		margin-top: 24px;
+		font-weight: 700;
+		color: var(--color-black);
+	}
+
+	.gut-pain {
+		background:
+			radial-gradient(circle at 12% 20%, rgba(77, 163, 217, 0.09), transparent 22%),
+			linear-gradient(180deg, rgba(245, 245, 243, 0.86), rgba(255, 255, 255, 0.96));
+	}
+
+	.gut-pain__grid {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+		gap: 28px;
+		align-items: center;
+	}
+
+	.gut-pain__copy {
+		max-width: none;
+	}
+
+	.gut-pain__visual {
+		overflow: hidden;
+		border: 1px solid var(--color-border);
+		border-radius: 24px;
+		background: rgba(255, 255, 255, 0.95);
+		box-shadow: 0 18px 38px rgba(11, 11, 11, 0.08);
+	}
+
+	.gut-pain__visual img {
+		width: 100%;
+		height: auto;
+		display: block;
+	}
+
+	.gut-fix-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 14px;
+		margin-top: 26px;
+	}
+
+	.gut-fix-item,
+	.gut-review-card {
+		padding: 18px 20px;
+		border-radius: 18px;
+		border: 1px solid var(--color-border);
+		background: rgba(255, 255, 255, 0.94);
+		box-shadow: 0 10px 24px rgba(11, 11, 11, 0.05);
+		border-top: 3px solid rgba(37, 99, 235, 0.18);
+	}
+
+	.gut-fix-item:nth-child(even),
+	.gut-review-card:nth-child(even) {
+		border-top-color: rgba(163, 230, 53, 0.4);
+	}
+
+	.gut-review {
+		background:
+			radial-gradient(circle at 85% 18%, rgba(163, 230, 53, 0.08), transparent 18%),
+			rgba(255, 255, 255, 0.98);
+	}
+
+	.gut-section-head {
+		max-width: 720px;
+		margin-bottom: 28px;
+	}
+
+	.gut-review-grid {
+		display: grid;
+		grid-template-columns: repeat(5, minmax(0, 1fr));
+		gap: 14px;
+	}
+
+	.gut-review-card h3 {
+		font-size: 1rem;
+	}
+
+	.gut-review-card p {
+		margin-top: 10px;
+		font-size: 0.97rem;
+		line-height: 1.55;
+	}
+
+	.gut-local {
+		background:
+			radial-gradient(circle at 18% 28%, rgba(37, 99, 235, 0.08), transparent 20%),
+			linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(245, 245, 243, 0.68));
+	}
+
+	.gut-local__grid {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(300px, 380px);
+		gap: 24px;
+		align-items: start;
+	}
+
+	.gut-local__grid p {
+		margin-top: 14px;
+		font-size: 1.04rem;
+		line-height: 1.7;
+	}
+
+	.gut-local__card,
+	.gut-offer__panel {
+		padding: 24px;
+		border-radius: 22px;
+		border: 1px solid var(--color-border);
+		background: rgba(255, 255, 255, 0.92);
+		box-shadow: 0 14px 30px rgba(11, 11, 11, 0.05);
+		border-top: 3px solid rgba(37, 99, 235, 0.24);
+	}
+
+	.gut-local__label {
+		margin: 0 0 12px;
+		font-family: 'Sora', sans-serif;
+		font-size: 0.84rem;
+		font-weight: 700;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+		color: var(--color-blue);
+	}
+
+	.gut-local__card ul {
+		margin: 0;
+		padding-left: 18px;
+		display: grid;
+		gap: 10px;
+	}
+
+	.gut-local__card li::marker {
+		color: var(--color-green);
+	}
+
+	.gut-services {
+		background:
+			radial-gradient(circle at 82% 16%, rgba(37, 99, 235, 0.11), transparent 20%),
+			radial-gradient(circle at 15% 72%, rgba(163, 230, 53, 0.08), transparent 18%),
+			linear-gradient(180deg, rgba(245, 245, 243, 0.84), rgba(255, 255, 255, 0.95)),
+			var(--color-white);
+	}
+
+	.gut-services__panel {
+		position: relative;
+		overflow: hidden;
+		border: 1px solid var(--color-border);
+		border-radius: 30px;
+		background: #fff;
+		box-shadow: 0 20px 42px rgba(11, 11, 11, 0.08);
+	}
+
+	.gut-services__panel::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(11, 11, 11, 0.44));
+		pointer-events: none;
+	}
+
+	.gut-services__image {
+		display: block;
+		width: 100%;
+		height: auto;
+	}
+
+	.gut-services__overlay {
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 1;
+		padding: 28px;
+		color: var(--color-white);
+	}
+
+	.gut-services__overlay .gut-section__eyebrow {
+		color: var(--color-blue);
+		text-shadow:
+			0 1px 0 rgba(255, 255, 255, 0.92),
+			0 0 4px rgba(255, 255, 255, 0.78);
+	}
+
+	.gut-services__overlay h2 {
+		max-width: 14ch;
+		color: var(--color-blue);
+		text-shadow:
+			0 1px 0 rgba(255, 255, 255, 0.94),
+			0 0 5px rgba(255, 255, 255, 0.82);
+	}
+
+	.gut-service-list {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 12px;
+		margin-top: 26px;
+		justify-content: center;
+	}
+
+	.gut-services .gut-service-list span {
+		border: 1px solid rgba(255, 255, 255, 0.88);
+		background: rgba(255, 255, 255, 0.82);
+		backdrop-filter: blur(8px);
+		box-shadow: 0 8px 18px rgba(11, 11, 11, 0.06);
+	}
+
+	.gut-offer {
+		padding-top: 18px;
+	}
+
+	.gut-offer__panel {
+		display: grid;
+		grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.8fr);
+		gap: 24px;
+		background:
+			radial-gradient(circle at 88% 22%, rgba(163, 230, 53, 0.1), transparent 22%),
+			linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(77, 163, 217, 0.08)),
+			rgba(255, 255, 255, 0.96);
+	}
+
+	.gut-offer__panel p {
+		margin-top: 12px;
+		font-size: 1.04rem;
+		line-height: 1.7;
+	}
+
+	.gut-offer__actions {
+		display: grid;
+		align-content: center;
+		gap: 14px;
+	}
+
+	.gut-faq {
+		padding-top: 22px;
+		background:
+			radial-gradient(circle at 12% 16%, rgba(77, 163, 217, 0.07), transparent 16%),
+			transparent;
+	}
+
+	.gut-faq-list {
+		display: grid;
+		gap: 12px;
+		margin-top: 28px;
+	}
+
+	.gut-faq-item {
+		border: 1px solid var(--color-border);
+		border-radius: 16px;
+		background: rgba(255, 255, 255, 0.96);
+		overflow: hidden;
+		border-top: 2px solid rgba(163, 230, 53, 0.26);
+	}
+
+	.gut-faq-item summary {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 16px;
+		padding: 18px 20px;
+		cursor: pointer;
+		list-style: none;
+		font-family: 'Sora', sans-serif;
+		font-size: 0.96rem;
+		font-weight: 600;
+	}
+
+	.gut-faq-item summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.gut-faq-chevron {
+		width: 18px;
+		height: 18px;
+		flex: 0 0 auto;
+		transition: transform 180ms ease;
+	}
+
+	.gut-faq-item[open] .gut-faq-chevron {
+		transform: rotate(180deg);
+	}
+
+	.gut-faq-item p {
+		padding: 0 20px 18px;
+		font-size: 1rem;
+		line-height: 1.65;
+	}
+
+	.landing-footer {
+		border-top: 1px solid var(--color-border);
+		background: rgba(255, 255, 255, 0.9);
+	}
+
+	.landing-shell .button.secondary {
+		border-color: rgba(163, 230, 53, 0.45);
+		color: #365314;
+		background: linear-gradient(180deg, rgba(236, 252, 203, 0.92), rgba(255, 255, 255, 0.96));
+		box-shadow: 0 12px 24px rgba(163, 230, 53, 0.12);
+	}
+
+	.landing-shell .button.secondary:hover {
+		border-color: rgba(132, 204, 22, 0.52);
+		background: linear-gradient(180deg, rgba(217, 249, 157, 0.94), rgba(255, 255, 255, 0.98));
+	}
+
+	.landing-footer__inner {
+		display: flex;
+		justify-content: space-between;
+		gap: 20px;
+		padding: 20px 24px 30px;
+		font-size: 0.9rem;
+		color: #475569;
+	}
+
+	@media (max-width: 900px) {
+		.gut-hero__grid,
+		.gut-pain__grid,
+		.gut-local__grid,
+		.gut-offer__panel {
+			grid-template-columns: 1fr;
+		}
+
+		.gut-review-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
+	@media (max-width: 780px) {
+		.landing-topbar__inner {
+			min-height: 60px;
+			gap: 12px;
+			padding-top: 8px;
+			padding-bottom: 8px;
+		}
+
+		.landing-brand {
+			min-width: 0;
+			gap: 10px;
+			font-size: 0.88rem;
+		}
+
+		.landing-brand img {
+			width: 34px;
+			height: 34px;
+		}
+
+		.landing-topbar__inner .button {
+			padding: 11px 14px;
+			font-size: 0.78rem;
+			letter-spacing: 0.01em;
+			white-space: nowrap;
+		}
+
+		.landing-footer__inner {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+
+		.gut-hero {
+			padding-top: 34px;
+		}
+
+		.gut-form__grid--two,
+		.gut-fix-grid,
+		.gut-review-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.gut-services__overlay {
+			position: static;
+			padding: 22px;
+			background: rgba(255, 255, 255, 0.98);
+			color: var(--color-black);
+		}
+
+		.gut-services__panel::after {
+			display: none;
+		}
+
+		.gut-services__overlay .gut-section__eyebrow {
+			color: var(--color-blue);
+		}
+
+		.gut-services__overlay h2 {
+			color: var(--color-blue);
+		}
+
+		.gut-form__actions {
+			flex-direction: column;
+		}
+
+		.gut-form-card,
+		.gut-local__card,
+		.gut-offer__panel {
+			padding: 22px;
+		}
+	}
+
+	@media (max-width: 560px) {
+		.landing-topbar__inner {
+			gap: 10px;
+		}
+
+		.landing-brand span {
+			font-size: 0.82rem;
+			line-height: 1.1;
+		}
+
+		.landing-topbar__inner .button {
+			padding: 10px 12px;
+			font-size: 0.74rem;
+		}
+	}
+</style>

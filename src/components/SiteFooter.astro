@@ -2,23 +2,23 @@
 const logoSrc = '/mike%20the%20tech%20ninja%20logo%202026.png'
 
 const services = [
-	'Websites & Landing Pages',
-	'Custom AI & Automation',
-	'Apps & Digital Tools',
-	'Paid Media & SEO',
-	'Lifecycle & Email Marketing',
-	'CRO & Digital Strategy',
+	{label: 'Websites & Landing Pages', href: '/services/websites-landing-pages/'},
+	{label: 'Custom AI & Automation', href: '/services/custom-ai-automation/'},
+	{label: 'Apps & Digital Tools', href: '/services/apps-digital-tools/'},
+	{label: 'Paid Media & SEO', href: '/services/paid-media-seo/'},
+	{label: 'Lifecycle & Email Marketing', href: '/services/lifecycle-email-marketing/'},
+	{label: 'CRO & Digital Strategy', href: '/services/cro-digital-strategy/'},
 ]
 
 const socialLinks = [
 	{
-		label: 'X',
-		href: '#',
-		icon: 'twitter',
+		label: 'Facebook',
+		href: 'https://www.facebook.com/mikethetechninja/',
+		icon: 'facebook',
 	},
 	{
 		label: 'LinkedIn',
-		href: 'https://www.linkedin.com/in/michael-whittenberger-8a52016/',
+		href: 'https://www.linkedin.com/in/mike-ninja-413545411',
 		icon: 'linkedin',
 	},
 	{
@@ -32,10 +32,11 @@ const socialLinks = [
 <footer class="site-footer">
 	<div class="container footer-inner">
 		<div class="footer-brand">
-			<img src={logoSrc} alt="Mike the Tech Ninja" />
+			<img src={logoSrc} alt="Mike the Tech Ninja logo" />
 			<div>
 				<div class="footer-title">Mike the Tech Ninja</div>
 				<div class="footer-subtitle">Serving the Triangle, NC</div>
+				<div class="footer-subtitle">235 Michigan Ave, Cary, NC 27519</div>
 			</div>
 		</div>
 		<div class="footer-socials">
@@ -46,9 +47,9 @@ const socialLinks = [
 					target={link.href.startsWith('http') ? '_blank' : undefined}
 					rel={link.href.startsWith('http') ? 'noreferrer' : undefined}
 				>
-					{link.icon === 'twitter' && (
+					{link.icon === 'facebook' && (
 						<svg viewBox="0 0 24 24" aria-hidden="true">
-							<path d="M23 3a10.9 10.9 0 0 1-3.14 1.53A4.48 4.48 0 0 0 12 7.53v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+							<path d="M14 8h3V4h-3c-3.31 0-6 2.69-6 6v2H5v4h3v5h4v-5h4l1-4h-5v-2c0-1.1.9-2 2-2z"></path>
 						</svg>
 					)}
 					{link.icon === 'linkedin' && (
@@ -68,7 +69,14 @@ const socialLinks = [
 		</div>
 	</div>
 	<div class="container footer-services">
-		<p>{services.join(' / ')}</p>
+		<p>
+			{services.map((service, index) => (
+				<>
+					{index > 0 && <span> / </span>}
+					<a href={service.href}>{service.label}</a>
+				</>
+			))}
+		</p>
 	</div>
 	<div class="container footer-note">
 		<p>&copy; 2026 Mike the Tech Ninja. All rights reserved.</p>

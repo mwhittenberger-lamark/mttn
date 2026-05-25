@@ -1,0 +1,151 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import SiteHeader from '../../components/SiteHeader.astro'
+import SiteFooter from '../../components/SiteFooter.astro'
+import {servicePages} from '../../data/service-pages'
+---
+
+<Layout
+	title="Small Business Services in Raleigh and the Triangle | Mike the Tech Ninja"
+	description="Explore practical websites, AI, apps, paid media, SEO, email marketing, and digital strategy services for Triangle small businesses."
+	canonical="https://whoisthetechninja.com/services/"
+	robots="index, follow, max-image-preview:large"
+>
+	<div class="service-hub-page">
+		<SiteHeader />
+		<main>
+			<section class="service-hub-hero">
+				<div class="container service-hub-hero__inner">
+					<p class="service-hub-eyebrow">Core services for Triangle small businesses</p>
+					<h1>Practical digital services built around what your business actually needs next.</h1>
+					<p>
+						Choose the area that fits the current bottleneck. Every service is designed to help you
+						make a clearer decision, get something useful into the business faster, and avoid bloated
+						agency overhead.
+					</p>
+				</div>
+			</section>
+
+			<section class="service-hub-list">
+				<div class="container service-hub-grid">
+					{servicePages.map((service) => (
+						<a class="service-hub-card" href={`/services/${service.slug}/`}>
+							<img src={`/icons/${service.icon}.svg`} alt="" aria-hidden="true" />
+							<h2>{service.shortTitle}</h2>
+							<p>{service.metaDescription}</p>
+							<span>Explore service</span>
+						</a>
+					))}
+				</div>
+			</section>
+		</main>
+		<SiteFooter />
+	</div>
+
+	<script src="/scripts/site-nav.js" defer></script>
+</Layout>
+
+<style>
+	.service-hub-page {
+		background:
+			radial-gradient(circle at 12% 0%, rgba(37, 99, 235, 0.08), transparent 22%),
+			radial-gradient(circle at 92% 6%, rgba(163, 230, 53, 0.08), transparent 18%),
+			linear-gradient(180deg, #fff 0%, #f8fafc 100%);
+	}
+
+	.service-hub-hero,
+	.service-hub-list {
+		padding: 72px 0;
+	}
+
+	.service-hub-hero__inner {
+		max-width: 860px;
+	}
+
+	.service-hub-eyebrow {
+		display: inline-flex;
+		align-items: center;
+		gap: 10px;
+		margin: 0 0 14px;
+		font-family: 'Sora', sans-serif;
+		font-size: 0.8rem;
+		font-weight: 700;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		color: var(--color-blue);
+	}
+
+	.service-hub-eyebrow::after {
+		content: '';
+		width: 34px;
+		height: 2px;
+		border-radius: 999px;
+		background: linear-gradient(90deg, var(--color-blue), var(--color-green));
+	}
+
+	.service-hub-hero__inner p {
+		font-size: 1.08rem;
+		line-height: 1.72;
+		color: #475569;
+	}
+
+	.service-hub-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 16px;
+	}
+
+	.service-hub-card {
+		padding: 22px;
+		border-radius: 22px;
+		border: 1px solid var(--color-border);
+		border-top: 3px solid rgba(37, 99, 235, 0.24);
+		background: rgba(255, 255, 255, 0.96);
+		box-shadow: 0 14px 30px rgba(11, 11, 11, 0.05);
+	}
+
+	.service-hub-card:nth-child(even) {
+		border-top-color: rgba(163, 230, 53, 0.38);
+	}
+
+	.service-hub-card img {
+		width: 22px;
+		height: 22px;
+	}
+
+	.service-hub-card h2 {
+		margin-top: 16px;
+		font-size: 1.1rem;
+	}
+
+	.service-hub-card p {
+		margin-top: 12px;
+		font-size: 1rem;
+		line-height: 1.68;
+		color: #475569;
+	}
+
+	.service-hub-card span {
+		display: inline-flex;
+		margin-top: 16px;
+		font-weight: 700;
+		color: var(--color-blue);
+	}
+
+	@media (max-width: 1024px) {
+		.service-hub-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
+	@media (max-width: 780px) {
+		.service-hub-hero,
+		.service-hub-list {
+			padding: 56px 0;
+		}
+
+		.service-hub-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

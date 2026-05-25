@@ -12,7 +12,7 @@ const authorProfile = {
 	bio:
 		'Mike helps Triangle small businesses turn limited budgets into smarter websites, more useful AI, cleaner follow-up, and clearer digital strategy without big-agency overhead.',
 	imageSrc: '/mike-whittenberger-headshot.jpg',
-	linkedinHref: 'https://www.linkedin.com/in/michael-whittenberger-8a52016/',
+	linkedinHref: 'https://www.linkedin.com/in/mike-ninja-413545411',
 	linkedinLabel: 'Connect with Mike on LinkedIn',
 }
 
@@ -283,7 +283,12 @@ const postStructuredData = post?.schemaMarkup?.trim() || fallbackStructuredData
 							</div>
 
 							<section class="author-box" aria-labelledby="author-box-title">
-								<img class="author-box__image" src={authorProfile.imageSrc} alt={authorProfile.name} loading="lazy" />
+								<img
+									class="author-box__image"
+									src={authorProfile.imageSrc}
+									alt="Mike Whittenberger, founder of Mike the Tech Ninja"
+									loading="lazy"
+								/>
 								<div class="author-box__copy">
 									<p class="author-box__eyebrow">About the author</p>
 									<h2 id="author-box-title">{authorProfile.name}</h2>

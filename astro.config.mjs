@@ -16,4 +16,12 @@ export default defineConfig({
       useCdn: sanityUseCdn,
     }),
   ],
+  vite: {
+    optimizeDeps: {
+      exclude: ['astro-portabletext', '@sanity/astro', '@sanity/client', '@sanity/image-url'],
+    },
+    ssr: {
+      noExternal: ['astro-portabletext', '@sanity/astro'],
+    },
+  },
 });
