@@ -1,0 +1,348 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+
+const updatedOn = 'May 25, 2026';
+const structuredData = JSON.stringify({
+	'@context': 'https://schema.org',
+	'@type': 'WebPage',
+	name: 'Privacy Policy',
+	url: 'https://whoisthetechninja.com/privacy-policy/',
+	description:
+		'Privacy Policy for Mike the Tech Ninja covering personal information, consumer rights, and California privacy disclosures.',
+});
+---
+
+<Layout
+	title="Privacy Policy | Mike the Tech Ninja"
+	description="Read the Privacy Policy for Mike the Tech Ninja, including California privacy rights, data use disclosures, and contact information."
+	canonical="https://whoisthetechninja.com/privacy-policy/"
+	robots="index, follow, max-image-preview:large"
+	structuredData={structuredData}
+>
+	<div class="legal-page">
+		<SiteHeader />
+		<main class="legal-main">
+			<section class="legal-hero">
+				<div class="container legal-hero__inner">
+					<p class="legal-eyebrow">Privacy Policy</p>
+					<h1>How Mike the Tech Ninja collects, uses, and protects personal information.</h1>
+					<p>
+						This Privacy Policy explains what information is collected through this website, how it is
+						used to respond to inquiries and run the site, and what rights California residents may
+						have under applicable privacy law.
+					</p>
+					<p class="legal-updated">Last updated: {updatedOn}</p>
+				</div>
+			</section>
+
+			<section class="legal-content">
+				<div class="container legal-layout">
+					<aside class="legal-toc">
+						<div class="legal-panel">
+							<p class="legal-panel__label">On this page</p>
+							<nav>
+								<a href="#scope">Scope</a>
+								<a href="#collection">Information collected</a>
+								<a href="#use">How information is used</a>
+								<a href="#cookies">Cookies and advertising tools</a>
+								<a href="#sharing">Sharing and disclosure</a>
+								<a href="#rights">California privacy rights</a>
+								<a href="#retention">Retention and security</a>
+								<a href="#contact">Contact</a>
+							</nav>
+						</div>
+					</aside>
+
+					<div class="legal-copy">
+						<section id="scope">
+							<h2>1. Scope</h2>
+							<p>
+								This Privacy Policy applies to information collected through
+								<code>whoisthetechninja.com</code> and related landing pages operated by Mike the Tech
+								Ninja. It covers information you submit through contact forms, information generated
+								while you browse the site, and information used to deliver follow-up communication
+								about your inquiry.
+							</p>
+						</section>
+
+						<section id="collection">
+							<h2>2. Information collected</h2>
+							<p>The site may collect the following categories of personal information:</p>
+							<ul>
+								<li>Identifiers and contact details, such as first name, last name, email, and phone number.</li>
+								<li>Business information you choose to provide, such as business name, website URL, goals, budget, and project details.</li>
+								<li>Internet or device activity information, such as page URL, page title, and basic interaction data related to form submissions and analytics events.</li>
+								<li>Communications content you submit through forms, inquiries, or follow-up requests.</li>
+							</ul>
+							<p>
+								The site does not ask for sensitive personal information such as government IDs,
+								financial account numbers, or health information through its standard lead forms.
+							</p>
+						</section>
+
+						<section id="use">
+							<h2>3. How information is used</h2>
+							<p>Information may be used to:</p>
+							<ul>
+								<li>Respond to your inquiry or request a callback.</li>
+								<li>Send operational notifications about new leads by SMS through Twilio.</li>
+								<li>Review what services or business needs a prospective client is asking about.</li>
+								<li>Measure form submissions and marketing performance through analytics and tag-management tools.</li>
+								<li>Understand traffic sources, conversions, and campaign performance for Google Ads, Meta advertising, and other marketing efforts.</li>
+								<li>Maintain, secure, and improve the website and its landing pages.</li>
+							</ul>
+						</section>
+
+						<section id="cookies">
+							<h2>4. Cookies and advertising tools</h2>
+							<p>
+								This site may use cookies, pixels, tags, and similar technologies to understand how
+								visitors use the site, measure campaign performance, and improve marketing.
+							</p>
+							<p>
+								These tools may include Google Analytics 4, Google Ads, Meta tools such as the Meta
+								Pixel or related conversion tracking, Google Tag Manager, and similar analytics or
+								advertising technologies added over time.
+							</p>
+							<p>
+								Those tools may collect or infer information such as pages viewed, traffic source,
+								device or browser information, ad interactions, and conversion-related activity. That
+								information may be used to measure performance, improve campaigns, build audiences,
+								or support remarketing where configured.
+							</p>
+						</section>
+
+						<section id="sharing">
+							<h2>5. Sharing and disclosure</h2>
+							<p>
+								Personal information may be shared with service providers that help operate the
+								website or business workflow, including hosting providers, analytics and tag
+								management tools, SMS notification providers, and content-management providers.
+							</p>
+							<p>
+								Mike the Tech Ninja does not sell personal information for money. If any use of
+								personal information for advertising, retargeting, or audience-building were ever
+								considered a “sale” or “sharing” under California law, this policy and site notices
+								would need to be updated accordingly.
+							</p>
+							<p>
+								Information may also be disclosed when reasonably necessary to comply with law,
+								enforce site terms, protect rights or safety, or respond to lawful requests from
+								public authorities.
+							</p>
+						</section>
+
+						<section id="rights">
+							<h2>6. California privacy rights</h2>
+							<p>
+								If you are a California resident and the California Consumer Privacy Act, as amended,
+								applies to the business, you may have rights that can include the right to know, the
+								right to delete, the right to correct inaccurate information, and the right to opt
+								out of sale or sharing where applicable.
+							</p>
+							<p>
+								You may also have the right to limit certain uses of sensitive personal information
+								when a business uses that category of information in ways covered by California law.
+							</p>
+							<p>
+								To submit a privacy request, email <a href="mailto:mike@panempire.com">mike@panempire.com</a> or
+								use the contact form on this site and clearly state that your request is a privacy
+								request. Verification may be required before a request is completed.
+							</p>
+							<p>
+								California residents have the right not to receive discriminatory treatment for
+								exercising applicable privacy rights.
+							</p>
+						</section>
+
+						<section id="retention">
+							<h2>7. Retention and security</h2>
+							<p>
+								Information is kept for as long as reasonably necessary to respond to inquiries,
+								evaluate business opportunities, maintain records, comply with legal obligations, and
+								resolve disputes.
+							</p>
+							<p>
+								Reasonable administrative, technical, and organizational measures are used to help
+								protect personal information. No website or transmission method can be guaranteed to
+								be completely secure.
+							</p>
+						</section>
+
+						<section>
+							<h2>8. Third-party services and links</h2>
+							<p>
+								This site may link to third-party websites or rely on third-party services such as
+								Twilio, Google Analytics 4, Google Ads, Meta tools, Google Tag Manager, and Sanity for content
+								management. Those services operate under their own terms and privacy practices.
+							</p>
+						</section>
+
+						<section id="contact">
+							<h2>9. Contact information</h2>
+							<p>
+								If you have questions about this Privacy Policy or want to submit a privacy request,
+								contact:
+							</p>
+							<ul>
+								<li>Mike the Tech Ninja</li>
+								<li>235 Michigan Ave, Cary, NC 27519</li>
+								<li><a href="mailto:mike@panempire.com">mike@panempire.com</a></li>
+								<li><a href="tel:+16465301840">(646) 530-1840</a></li>
+							</ul>
+						</section>
+					</div>
+				</div>
+			</section>
+		</main>
+		<SiteFooter />
+	</div>
+
+	<script src="/scripts/site-nav.js" defer></script>
+</Layout>
+
+<style>
+	.legal-page {
+		background:
+			radial-gradient(circle at 12% 0%, rgba(37, 99, 235, 0.08), transparent 24%),
+			radial-gradient(circle at 94% 4%, rgba(163, 230, 53, 0.08), transparent 18%),
+			linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+	}
+
+	.legal-main {
+		padding-bottom: 32px;
+	}
+
+	.legal-hero {
+		padding: 72px 0 36px;
+	}
+
+	.legal-hero__inner {
+		max-width: 900px;
+	}
+
+	.legal-eyebrow,
+	.legal-panel__label {
+		display: inline-flex;
+		align-items: center;
+		gap: 10px;
+		margin: 0 0 14px;
+		font-family: 'Sora', sans-serif;
+		font-size: 0.8rem;
+		font-weight: 700;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		color: var(--color-blue);
+	}
+
+	.legal-eyebrow::after,
+	.legal-panel__label::after {
+		content: '';
+		width: 34px;
+		height: 2px;
+		border-radius: 999px;
+		background: linear-gradient(90deg, var(--color-blue), var(--color-green));
+	}
+
+	.legal-updated {
+		margin-top: 16px;
+		font-weight: 600;
+		color: #475569;
+	}
+
+	.legal-content {
+		padding: 16px 0 80px;
+	}
+
+	.legal-layout {
+		display: grid;
+		grid-template-columns: 280px minmax(0, 1fr);
+		gap: 28px;
+		align-items: start;
+	}
+
+	.legal-toc {
+		position: sticky;
+		top: 88px;
+	}
+
+	.legal-panel {
+		padding: 20px;
+		border: 1px solid var(--color-border);
+		border-radius: 22px;
+		background: rgba(255, 255, 255, 0.95);
+		box-shadow: 0 14px 30px rgba(11, 11, 11, 0.05);
+	}
+
+	.legal-panel nav {
+		display: grid;
+		gap: 10px;
+	}
+
+	.legal-panel a {
+		color: #475569;
+		font-weight: 600;
+	}
+
+	.legal-copy {
+		padding: 28px;
+		border: 1px solid var(--color-border);
+		border-radius: 28px;
+		background: rgba(255, 255, 255, 0.97);
+		box-shadow: 0 18px 45px rgba(11, 11, 11, 0.05);
+	}
+
+	.legal-copy section + section {
+		margin-top: 32px;
+		padding-top: 32px;
+		border-top: 1px solid rgba(11, 11, 11, 0.08);
+	}
+
+	.legal-copy h2 {
+		margin-bottom: 12px;
+	}
+
+	.legal-copy p,
+	.legal-copy li {
+		font-size: 1.03rem;
+		line-height: 1.74;
+		color: #475569;
+	}
+
+	.legal-copy ul {
+		padding-left: 20px;
+	}
+
+	.legal-copy a {
+		color: var(--color-blue);
+		text-decoration: underline;
+		text-underline-offset: 0.14em;
+	}
+
+	@media (max-width: 900px) {
+		.legal-layout {
+			grid-template-columns: 1fr;
+		}
+
+		.legal-toc {
+			position: static;
+		}
+	}
+
+	@media (max-width: 780px) {
+		.legal-hero {
+			padding: 56px 0 24px;
+		}
+
+		.legal-content {
+			padding-bottom: 64px;
+		}
+
+		.legal-copy {
+			padding: 22px;
+			border-radius: 22px;
+		}
+	}
+</style>

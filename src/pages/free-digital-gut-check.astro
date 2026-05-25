@@ -254,6 +254,16 @@ const structuredData = JSON.stringify({
 									<span>What is the biggest thing you want to improve?</span>
 									<textarea name="biggest_improvement" rows="4" required></textarea>
 								</label>
+								<label class="gut-form__consent">
+									<input type="checkbox" name="sms_opt_in" value="yes" />
+									<span>
+										I agree to be contacted by SMS about scheduling my call. Message and data
+										rates may apply. Consent is not a condition of purchase. See the
+										<a href="/privacy-policy/" target="_blank" rel="noreferrer">Privacy Policy</a>
+										and
+										<a href="/terms-of-service/" target="_blank" rel="noreferrer">Terms of Service</a>.
+									</span>
+								</label>
 								<div class="gut-form__actions">
 									<button class="button secondary" type="button" data-step-back>Back</button>
 									<button class="button primary gut-form__submit" type="submit">Schedule My Free Gut Check</button>
@@ -640,6 +650,37 @@ const structuredData = JSON.stringify({
 	.gut-form__fieldset {
 		padding: 0;
 		border: 0;
+	}
+
+	.gut-form__consent {
+		grid-template-columns: auto 1fr;
+		align-items: start;
+		gap: 10px;
+		padding: 14px 16px;
+		border: 1px solid rgba(11, 11, 11, 0.1);
+		border-radius: 14px;
+		background: rgba(255, 255, 255, 0.72);
+	}
+
+	.gut-form__consent input {
+		width: 18px;
+		height: 18px;
+		margin-top: 2px;
+		padding: 0;
+	}
+
+	.gut-form__consent span {
+		font-family: 'Source Sans 3', sans-serif;
+		font-size: 0.92rem;
+		font-weight: 400;
+		line-height: 1.45;
+		color: #334155;
+	}
+
+	.gut-form__consent a {
+		color: var(--color-blue);
+		text-decoration: underline;
+		text-underline-offset: 0.12em;
 	}
 
 	.gut-check-grid {

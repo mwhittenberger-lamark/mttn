@@ -9,7 +9,7 @@
 
 	if (!(form instanceof HTMLFormElement)) return;
 
-	const zapierWebhookUrl = 'https://hooks.zapier.com/hooks/catch/21390310/4oe12xb/';
+	const leadNotifyUrl = '/api/lead-notify';
 	let currentStep = 0;
 
 	const showStep = (index) => {
@@ -59,13 +59,14 @@
 		const formData = new FormData(form);
 		const helpWith = formData.getAll('help_with').map((value) => String(value).trim()).filter(Boolean);
 
-		const payload = new URLSearchParams({
+		const payload = {
 			source: String(formData.get('source') ?? 'Paid Landing Page').trim(),
 			firstName: String(formData.get('first_name') ?? '').trim(),
 			lastName: String(formData.get('last_name') ?? '').trim(),
 			businessName: String(formData.get('business_name') ?? '').trim(),
 			email: String(formData.get('email') ?? '').trim(),
 			phone: String(formData.get('phone') ?? '').trim(),
+			smsOptIn: formData.get('sms_opt_in') === 'yes' ? 'Yes' : 'No',
 			websiteUrl: String(formData.get('website_url') ?? '').trim(),
 			helpWith: helpWith.join(', '),
 			budget: String(formData.get('budget') ?? '').trim(),
@@ -73,7 +74,7 @@
 			pageUrl: window.location.href,
 			pageTitle: document.title,
 			submittedAt: new Date().toISOString(),
-		});
+		};
 
 		error?.setAttribute('hidden', '');
 
@@ -83,13 +84,16 @@
 		}
 
 		try {
-			const response = await fetch(zapierWebhookUrl, {
+			const response = await fetch(leadNotifyUrl, {
 				method: 'POST',
-				body: payload,
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(payload),
 			});
 
 			if (!response.ok) {
-				throw new Error(`Webhook request failed with ${response.status}`);
+				throw new Error(`Lead request failed with ${response.status}`);
 			}
 
 			window.dataLayer = window.dataLayer || [];

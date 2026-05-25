@@ -1,0 +1,291 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+
+const updatedOn = 'May 25, 2026';
+const structuredData = JSON.stringify({
+	'@context': 'https://schema.org',
+	'@type': 'WebPage',
+	name: 'Terms of Service',
+	url: 'https://whoisthetechninja.com/terms-of-service/',
+	description: 'Terms of Service for Mike the Tech Ninja website use, inquiries, and content.',
+});
+---
+
+<Layout
+	title="Terms of Service | Mike the Tech Ninja"
+	description="Read the Terms of Service for Mike the Tech Ninja, including website use terms, disclaimers, and contact information."
+	canonical="https://whoisthetechninja.com/terms-of-service/"
+	robots="index, follow, max-image-preview:large"
+	structuredData={structuredData}
+>
+	<div class="legal-page">
+		<SiteHeader />
+		<main class="legal-main">
+			<section class="legal-hero">
+				<div class="container legal-hero__inner">
+					<p class="legal-eyebrow">Terms of Service</p>
+					<h1>Rules and expectations for using this website and contacting Mike the Tech Ninja.</h1>
+					<p>
+						These Terms of Service govern access to this website, submitted inquiries, and use of the
+						content provided here. By using the site, you agree to these terms.
+					</p>
+					<p class="legal-updated">Last updated: {updatedOn}</p>
+				</div>
+			</section>
+
+			<section class="legal-content">
+				<div class="container legal-layout">
+					<aside class="legal-toc">
+						<div class="legal-panel">
+							<p class="legal-panel__label">On this page</p>
+							<nav>
+								<a href="#use">Website use</a>
+								<a href="#content">Content and intellectual property</a>
+								<a href="#inquiries">Inquiries and no guarantee of engagement</a>
+								<a href="#links">Third-party links</a>
+								<a href="#disclaimers">Disclaimers</a>
+								<a href="#liability">Limitation of liability</a>
+								<a href="#contact">Contact</a>
+							</nav>
+						</div>
+					</aside>
+
+					<div class="legal-copy">
+						<section id="use">
+							<h2>1. Website use</h2>
+							<p>
+								You may use this website for lawful purposes only. You agree not to interfere with
+								the site, attempt unauthorized access, submit malicious code, or use the site in a
+								way that could impair performance or availability.
+							</p>
+						</section>
+
+						<section id="content">
+							<h2>2. Content and intellectual property</h2>
+							<p>
+								Unless otherwise stated, the website design, copy, branding, logos, graphics, blog
+								content, and original materials on this site are owned by Mike the Tech Ninja or used
+								with permission. You may not reproduce, republish, distribute, or commercially exploit
+								site materials without prior written permission.
+							</p>
+						</section>
+
+						<section id="inquiries">
+							<h2>3. Inquiries and no guarantee of engagement</h2>
+							<p>
+								Submitting a form or contacting Mike the Tech Ninja does not create a client
+								relationship, partnership, or guarantee of service availability. Any project,
+								engagement, or consulting relationship requires separate agreement on scope, fees, and
+								terms.
+							</p>
+							<p>
+								You are responsible for ensuring that the information you provide is accurate and that
+								you have the right to share it.
+							</p>
+						</section>
+
+						<section id="links">
+							<h2>4. Third-party links and services</h2>
+							<p>
+								This website may include links to third-party websites, platforms, or tools. Those
+								sites are provided for convenience only. Mike the Tech Ninja is not responsible for
+								their content, availability, or privacy practices.
+							</p>
+						</section>
+
+						<section id="disclaimers">
+							<h2>5. Disclaimers</h2>
+							<p>
+								This website and its content are provided on an “as is” and “as available” basis.
+								While reasonable effort is made to keep information accurate and current, no warranty
+								is made that the site will be uninterrupted, error-free, or suitable for every
+								particular purpose.
+							</p>
+							<p>
+								Content on the site is general information and marketing content, not legal, tax, or
+								financial advice.
+							</p>
+						</section>
+
+						<section id="liability">
+							<h2>6. Limitation of liability</h2>
+							<p>
+								To the fullest extent permitted by law, Mike the Tech Ninja will not be liable for
+								indirect, incidental, consequential, special, or punitive damages arising out of or
+								related to use of the website, inability to use the website, or reliance on its
+								content.
+							</p>
+						</section>
+
+						<section>
+							<h2>7. Changes to these terms</h2>
+							<p>
+								These Terms of Service may be updated from time to time. Continued use of the site
+								after changes are posted means you accept the updated terms.
+							</p>
+						</section>
+
+						<section id="contact">
+							<h2>8. Contact information</h2>
+							<ul>
+								<li>Mike the Tech Ninja</li>
+								<li>235 Michigan Ave, Cary, NC 27519</li>
+								<li><a href="mailto:mike@panempire.com">mike@panempire.com</a></li>
+								<li><a href="tel:+16465301840">(646) 530-1840</a></li>
+							</ul>
+						</section>
+					</div>
+				</div>
+			</section>
+		</main>
+		<SiteFooter />
+	</div>
+
+	<script src="/scripts/site-nav.js" defer></script>
+</Layout>
+
+<style>
+	.legal-page {
+		background:
+			radial-gradient(circle at 12% 0%, rgba(37, 99, 235, 0.08), transparent 24%),
+			radial-gradient(circle at 94% 4%, rgba(163, 230, 53, 0.08), transparent 18%),
+			linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+	}
+
+	.legal-main {
+		padding-bottom: 32px;
+	}
+
+	.legal-hero {
+		padding: 72px 0 36px;
+	}
+
+	.legal-hero__inner {
+		max-width: 900px;
+	}
+
+	.legal-eyebrow,
+	.legal-panel__label {
+		display: inline-flex;
+		align-items: center;
+		gap: 10px;
+		margin: 0 0 14px;
+		font-family: 'Sora', sans-serif;
+		font-size: 0.8rem;
+		font-weight: 700;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		color: var(--color-blue);
+	}
+
+	.legal-eyebrow::after,
+	.legal-panel__label::after {
+		content: '';
+		width: 34px;
+		height: 2px;
+		border-radius: 999px;
+		background: linear-gradient(90deg, var(--color-blue), var(--color-green));
+	}
+
+	.legal-updated {
+		margin-top: 16px;
+		font-weight: 600;
+		color: #475569;
+	}
+
+	.legal-content {
+		padding: 16px 0 80px;
+	}
+
+	.legal-layout {
+		display: grid;
+		grid-template-columns: 280px minmax(0, 1fr);
+		gap: 28px;
+		align-items: start;
+	}
+
+	.legal-toc {
+		position: sticky;
+		top: 88px;
+	}
+
+	.legal-panel {
+		padding: 20px;
+		border: 1px solid var(--color-border);
+		border-radius: 22px;
+		background: rgba(255, 255, 255, 0.95);
+		box-shadow: 0 14px 30px rgba(11, 11, 11, 0.05);
+	}
+
+	.legal-panel nav {
+		display: grid;
+		gap: 10px;
+	}
+
+	.legal-panel a {
+		color: #475569;
+		font-weight: 600;
+	}
+
+	.legal-copy {
+		padding: 28px;
+		border: 1px solid var(--color-border);
+		border-radius: 28px;
+		background: rgba(255, 255, 255, 0.97);
+		box-shadow: 0 18px 45px rgba(11, 11, 11, 0.05);
+	}
+
+	.legal-copy section + section {
+		margin-top: 32px;
+		padding-top: 32px;
+		border-top: 1px solid rgba(11, 11, 11, 0.08);
+	}
+
+	.legal-copy h2 {
+		margin-bottom: 12px;
+	}
+
+	.legal-copy p,
+	.legal-copy li {
+		font-size: 1.03rem;
+		line-height: 1.74;
+		color: #475569;
+	}
+
+	.legal-copy ul {
+		padding-left: 20px;
+	}
+
+	.legal-copy a {
+		color: var(--color-blue);
+		text-decoration: underline;
+		text-underline-offset: 0.14em;
+	}
+
+	@media (max-width: 900px) {
+		.legal-layout {
+			grid-template-columns: 1fr;
+		}
+
+		.legal-toc {
+			position: static;
+		}
+	}
+
+	@media (max-width: 780px) {
+		.legal-hero {
+			padding: 56px 0 24px;
+		}
+
+		.legal-content {
+			padding-bottom: 64px;
+		}
+
+		.legal-copy {
+			padding: 22px;
+			border-radius: 22px;
+		}
+	}
+</style>

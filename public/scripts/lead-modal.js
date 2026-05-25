@@ -9,7 +9,7 @@
 
 	if (!(leadModal instanceof HTMLElement) || !(leadForm instanceof HTMLFormElement)) return;
 
-	const zapierWebhookUrl = 'https://hooks.zapier.com/hooks/catch/21390310/4oe12xb/';
+	const leadNotifyUrl = '/api/lead-notify';
 	let lastLeadTrigger = null;
 
 	const resetLeadFeedback = () => {
@@ -92,16 +92,17 @@
 		event.preventDefault();
 
 		const formData = new FormData(leadForm);
-		const payload = new URLSearchParams({
+		const payload = {
 			firstName: String(formData.get('first_name') ?? '').trim(),
 			lastName: String(formData.get('last_name') ?? '').trim(),
 			email: String(formData.get('email') ?? '').trim(),
 			phone: String(formData.get('phone') ?? '').trim(),
+			smsOptIn: formData.get('sms_opt_in') === 'yes' ? 'Yes' : 'No',
 			source: String(formData.get('source') ?? '').trim(),
 			pageUrl: window.location.href,
 			pageTitle: document.title,
 			submittedAt: new Date().toISOString(),
-		});
+		};
 
 		leadError?.setAttribute('hidden', '');
 
@@ -111,13 +112,16 @@
 		}
 
 		try {
-			const response = await fetch(zapierWebhookUrl, {
+			const response = await fetch(leadNotifyUrl, {
 				method: 'POST',
-				body: payload,
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(payload),
 			});
 
 			if (!response.ok) {
-				throw new Error(`Webhook request failed with ${response.status}`);
+				throw new Error(`Lead request failed with ${response.status}`);
 			}
 
 			window.dataLayer = window.dataLayer || [];
