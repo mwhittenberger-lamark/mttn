@@ -1,0 +1,245 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import {sanityClient} from 'sanity:client'
+import {urlFor} from '../../lib/sanity-image'
+
+type BlogPostCard = {
+	_id: string
+	title: string
+	slug: {current: string}
+	excerpt: string
+	publishedAt: string
+	tags?: string[]
+	featuredImage?: {
+		alt?: string
+	}
+}
+
+const posts = await sanityClient.fetch<BlogPostCard[]>(
+	`*[_type == "post" && defined(slug.current)] | order(publishedAt desc){
+		_id,
+		title,
+		slug,
+		excerpt,
+		publishedAt,
+		tags,
+		featuredImage{
+			alt,
+			asset
+		}
+	}`
+)
+
+const formatDate = (value: string) =>
+	new Date(value).toLocaleDateString('en-US', {
+		year: 'numeric',
+		month: 'long',
+		day: 'numeric',
+	})
+---
+
+<Layout
+	title="Blog | Mike the Tech Ninja"
+	description="Articles on websites, AI, SEO, paid media, CRO, and digital strategy for Triangle small businesses."
+	canonical="https://whoisthetechninja.com/blog/"
+	robots="index, follow, max-image-preview:large"
+>
+	<main class="blog-page">
+		<section class="blog-hero">
+			<div class="container blog-hero__inner">
+				<p class="blog-hero__eyebrow">Mike the Tech Ninja Blog</p>
+				<h1>Practical notes on websites, AI, SEO, and digital growth.</h1>
+				<p class="blog-hero__lede">
+					Articles for small business owners who want clearer digital decisions, better systems, and fewer
+					guesses.
+				</p>
+			</div>
+		</section>
+
+		<section class="blog-listing">
+			<div class="container">
+				{posts.length === 0 ? (
+					<div class="blog-empty">
+						<h2>No posts published yet.</h2>
+						<p>
+							The Sanity studio is ready. Publish your first post and it will appear here automatically.
+						</p>
+					</div>
+				) : (
+					<div class="blog-grid">
+						{posts.map((post) => {
+							const imageUrl = post.featuredImage?.asset
+								? urlFor(post.featuredImage).width(900).height(560).fit('crop').auto('format').url()
+								: null
+
+							return (
+								<article class="blog-card">
+									{imageUrl && (
+										<a href={`/blog/${post.slug.current}/`} class="blog-card__image-link">
+											<img
+												class="blog-card__image"
+												src={imageUrl}
+												alt={post.featuredImage?.alt ?? post.title}
+												loading="lazy"
+											/>
+										</a>
+									)}
+									<div class="blog-card__body">
+										<p class="blog-card__meta">{formatDate(post.publishedAt)}</p>
+										<h2>
+											<a href={`/blog/${post.slug.current}/`}>{post.title}</a>
+										</h2>
+										<p>{post.excerpt}</p>
+										{post.tags && post.tags.length > 0 && (
+											<div class="blog-card__tags">
+												{post.tags.map((tag) => <span>{tag}</span>)}
+											</div>
+										)}
+										<a class="blog-card__link" href={`/blog/${post.slug.current}/`}>
+											Read article
+										</a>
+									</div>
+								</article>
+							)
+						})}
+					</div>
+				)}
+			</div>
+		</section>
+	</main>
+</Layout>
+
+<style>
+	.blog-page {
+		min-height: 100vh;
+		background:
+			radial-gradient(circle at 15% 0%, rgba(37, 99, 235, 0.08), transparent 24%),
+			radial-gradient(circle at 100% 10%, rgba(163, 230, 53, 0.08), transparent 20%),
+			linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+	}
+
+	.blog-hero {
+		padding: 72px 0 32px;
+	}
+
+	.blog-hero__inner {
+		max-width: 780px;
+	}
+
+	.blog-hero__eyebrow {
+		font-family: 'Sora', 'Avenir Next', 'Segoe UI', sans-serif;
+		font-size: 0.82rem;
+		font-weight: 600;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		color: var(--color-blue);
+	}
+
+	.blog-hero h1 {
+		margin-top: 14px;
+		font-size: clamp(2.5rem, 5vw, 4.2rem);
+		line-height: 1.04;
+	}
+
+	.blog-hero__lede {
+		max-width: 62ch;
+		margin-top: 20px;
+		font-size: 1.08rem;
+	}
+
+	.blog-listing {
+		padding: 12px 0 72px;
+	}
+
+	.blog-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 24px;
+	}
+
+	.blog-card {
+		overflow: hidden;
+		border: 1px solid var(--color-border);
+		border-radius: 24px;
+		background: rgba(255, 255, 255, 0.9);
+		box-shadow: 0 18px 42px rgba(11, 11, 11, 0.08);
+	}
+
+	.blog-card__image-link {
+		display: block;
+		aspect-ratio: 16 / 10;
+		background: rgba(11, 11, 11, 0.04);
+	}
+
+	.blog-card__image {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.blog-card__body {
+		display: grid;
+		gap: 14px;
+		padding: 24px;
+	}
+
+	.blog-card__meta {
+		font-family: 'Sora', 'Avenir Next', 'Segoe UI', sans-serif;
+		font-size: 0.8rem;
+		font-weight: 600;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+		color: var(--color-gray);
+	}
+
+	.blog-card h2 {
+		font-size: 1.5rem;
+		line-height: 1.15;
+	}
+
+	.blog-card h2 a:hover,
+	.blog-card__link:hover {
+		color: var(--color-blue);
+	}
+
+	.blog-card__tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+	}
+
+	.blog-card__tags span {
+		padding: 6px 10px;
+		border-radius: 999px;
+		background: rgba(37, 99, 235, 0.08);
+		font-size: 0.78rem;
+		font-weight: 600;
+		color: var(--color-black);
+	}
+
+	.blog-card__link {
+		font-family: 'Sora', 'Avenir Next', 'Segoe UI', sans-serif;
+		font-size: 0.9rem;
+		font-weight: 600;
+	}
+
+	.blog-empty {
+		padding: 40px 32px;
+		border: 1px solid var(--color-border);
+		border-radius: 24px;
+		background: rgba(255, 255, 255, 0.82);
+		text-align: center;
+	}
+
+	@media (max-width: 900px) {
+		.blog-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	@media (max-width: 700px) {
+		.blog-hero {
+			padding-top: 56px;
+		}
+	}
+</style>

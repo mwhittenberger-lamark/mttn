@@ -1,0 +1,37 @@
+---
+import {urlFor} from '../lib/sanity-image'
+
+const {value} = Astro.props
+
+const imageUrl = value?.asset ? urlFor(value).width(1200).fit('max').auto('format').url() : null
+const alt = value?.alt || ''
+const caption = value?.caption
+---
+
+{imageUrl && (
+	<figure class="portable-image">
+		<img src={imageUrl} alt={alt} loading="lazy" />
+		{caption && <figcaption>{caption}</figcaption>}
+	</figure>
+)}
+
+<style>
+	.portable-image {
+		margin: 1.8rem 0;
+	}
+
+	.portable-image img {
+		width: 100%;
+		height: auto;
+		border-radius: 18px;
+		box-shadow: 0 18px 40px rgba(11, 11, 11, 0.1);
+	}
+
+	.portable-image figcaption {
+		margin-top: 10px;
+		font-size: 0.95rem;
+		line-height: 1.5;
+		color: var(--color-gray);
+		text-align: center;
+	}
+</style>

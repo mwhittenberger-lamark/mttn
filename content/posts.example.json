@@ -1,0 +1,58 @@
+[
+  {
+    "title": "How Triangle Small Businesses Can Use AI Without Wasting Money",
+    "excerpt": "A practical look at the AI use cases that actually help small businesses save time, improve follow-up, and create better customer experiences.",
+    "featuredImage": {
+      "path": "content/images/ai-hero.jpg",
+      "alt": "Abstract AI dashboard on a laptop for a small business workflow"
+    },
+    "bodyBlocks": [
+      {
+        "type": "paragraph",
+        "text": "Most small businesses do not need an AI strategy deck."
+      },
+      {
+        "type": "paragraph",
+        "text": "They need one useful workflow that saves time, improves follow-up, or makes internal work easier."
+      },
+      {
+        "type": "image",
+        "path": "content/images/ai-inline-workflow.png",
+        "alt": "Example workflow diagram for lead qualification automation",
+        "caption": "A simple workflow beats an expensive strategy document."
+      },
+      {
+        "type": "paragraph",
+        "text": "That could be a lead qualification assistant, a better internal knowledge base, or a content workflow that helps the team publish more consistently."
+      }
+    ],
+    "slug": "triangle-small-business-ai-without-wasting-money",
+    "publishedAt": "2026-05-25T12:00:00.000Z",
+    "tags": ["ai", "small business", "operations"],
+    "schemaMarkup": "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"BlogPosting\",\n  \"headline\": \"How Triangle Small Businesses Can Use AI Without Wasting Money\"\n}",
+    "seo": {
+      "metaTitle": "How Triangle Small Businesses Can Use AI Without Wasting Money",
+      "metaDescription": "A practical guide to AI tools and workflows that actually help Triangle small businesses save time and improve follow-up.",
+      "canonicalUrl": "https://whoisthetechninja.com/blog/triangle-small-business-ai-without-wasting-money/",
+      "noIndex": false,
+      "ogTitle": "Triangle Small Business AI: What Actually Works",
+      "ogDescription": "Skip the hype. Focus on AI workflows that improve follow-up, save time, and support growth.",
+      "ogImage": {
+        "path": "content/images/ai-og.jpg",
+        "alt": "AI themed Open Graph image for a small business blog post"
+      },
+      "twitterTitle": "AI for Small Businesses Without the Hype",
+      "twitterDescription": "A practical look at where AI helps small businesses and where it just adds noise.",
+      "twitterImage": {
+        "path": "content/images/ai-twitter.jpg",
+        "alt": "Twitter image for an AI article aimed at small businesses"
+      }
+    }
+  },
+  {
+    "title": "What Makes a Small Business Website Actually Convert",
+    "excerpt": "A better small business website is not about looking expensive. It is about making the next step obvious and building trust quickly.",
+    "body": "Most small business websites underperform for simple reasons.\n\nThe offer is not clear, the next step is buried, the proof is weak, or the page does not make it easy for visitors to act.\n\nA high-converting site usually gets the basics right before it gets fancy.",
+    "tags": ["web design", "conversion rate optimization", "websites"]
+  }
+]
