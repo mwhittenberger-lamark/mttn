@@ -1,4 +1,6 @@
 ---
+import LeadModal from '../components/LeadModal.astro';
+
 interface Props {
 	title?: string;
 	description?: string;
@@ -69,6 +71,8 @@ const {
 	</head>
 	<body>
 		<slot />
+		<LeadModal />
+		<script src="/scripts/lead-modal.js" defer></script>
 	</body>
 </html>
 
@@ -238,6 +242,12 @@ const {
 
 	.nav-links .nav-links__cta:hover {
 		color: var(--color-white);
+	}
+
+	.nav-mobile-consult {
+		display: none;
+		color: var(--color-white);
+		white-space: nowrap;
 	}
 
 	.nav-links a {
@@ -669,6 +679,7 @@ const {
 	@media (max-width: 780px) {
 		.nav-inner {
 			padding: 10px 0;
+			gap: 20px;
 		}
 
 		.nav-links {
@@ -732,11 +743,17 @@ const {
 			display: inline-flex;
 		}
 
+		.nav-mobile-consult {
+			display: inline-flex;
+			margin-left: auto;
+			margin-right: 0;
+		}
+
 		.hero-grid {
 			grid-template-columns: 1fr;
 		}
 
-		.nav-inner > .button {
+		.nav-inner > .button:not(.nav-mobile-consult) {
 			display: none;
 		}
 	}

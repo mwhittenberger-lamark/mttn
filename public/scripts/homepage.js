@@ -4,20 +4,16 @@
 	const navToggle = document.querySelector('.nav-toggle');
 	const primaryNav = document.querySelector('#primary-nav');
 	const heroVisual = document.querySelector('.hero-visual');
-	const leadModal = document.querySelector('#lead-modal');
-	const leadForm = document.querySelector('#lead-form');
-	const leadSource = document.querySelector('#lead-source');
-	const leadSuccess = document.querySelector('#lead-success');
-	const leadError = document.querySelector('#lead-error');
-	const leadSubmit = document.querySelector('.lead-form__submit');
-	const leadTriggers = document.querySelectorAll('[data-lead-trigger]');
-	const leadCloseTargets = document.querySelectorAll('[data-lead-close]');
+	const offerModal = document.querySelector('#offer-modal');
+	const offerTriggers = document.querySelectorAll('[data-offer-trigger]');
+	const offerPanels = document.querySelectorAll('[data-offer-panel]');
+	const offerCloseTargets = document.querySelectorAll('[data-offer-close]');
+	const offerLeadTriggers = document.querySelectorAll('[data-offer-lead-trigger]');
 
 	if (!siteNav || !primaryNav) return;
 
-	const zapierWebhookUrl = 'https://hooks.zapier.com/hooks/catch/21390310/4oe12xb/';
 	const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
-	let lastLeadTrigger = null;
+	let lastOfferTrigger = null;
 	let parallaxFrame = 0;
 
 	const revealTargets = [];
@@ -245,37 +241,32 @@
 		closeNav();
 	};
 
-	const resetLeadFeedback = () => {
-		if (!(leadForm instanceof HTMLFormElement)) return;
-		leadForm.hidden = false;
-		leadForm.removeAttribute('aria-hidden');
-		leadSuccess?.setAttribute('hidden', '');
-		leadError?.setAttribute('hidden', '');
-		if (leadSubmit instanceof HTMLButtonElement) {
-			leadSubmit.disabled = false;
-			leadSubmit.textContent = 'Request My Callback';
-		}
-	};
+	const openOfferModal = (trigger) => {
+		if (!offerModal || !(trigger instanceof HTMLElement)) return;
+		lastOfferTrigger = trigger;
+		const offerId = trigger.dataset.offerTrigger;
+		let hasVisiblePanel = false;
 
-	const openLeadModal = (trigger) => {
-		if (!leadModal) return;
-		lastLeadTrigger = trigger ?? null;
-		resetLeadFeedback();
-		if (leadSource && trigger?.dataset.leadTrigger) {
-			leadSource.value = trigger.dataset.leadTrigger;
-		}
-		leadModal.hidden = false;
+		offerPanels.forEach((panel) => {
+			if (!(panel instanceof HTMLElement)) return;
+			const matches = panel.dataset.offerPanel === offerId;
+			panel.hidden = !matches;
+			if (matches) hasVisiblePanel = true;
+		});
+
+		if (!hasVisiblePanel) return;
+
+		offerModal.hidden = false;
 		document.body.style.overflow = 'hidden';
-		const firstInput = leadModal.querySelector('input[name="first_name"]');
-		firstInput?.focus();
+		offerModal.querySelector('button:not([data-offer-close])')?.focus();
 	};
 
-	const closeLeadModal = () => {
-		if (!leadModal) return;
-		leadModal.hidden = true;
+	const closeOfferModal = () => {
+		if (!offerModal) return;
+		offerModal.hidden = true;
 		document.body.style.overflow = '';
-		if (lastLeadTrigger instanceof HTMLElement) {
-			lastLeadTrigger.focus();
+		if (lastOfferTrigger instanceof HTMLElement) {
+			lastOfferTrigger.focus();
 		}
 	};
 
@@ -294,24 +285,32 @@
 		link.addEventListener('click', () => closeNav());
 	});
 
-	leadTriggers.forEach((trigger) => {
-		trigger.addEventListener('click', (event) => {
-			event.preventDefault();
+	offerTriggers.forEach((trigger) => {
+		trigger.addEventListener('click', () => {
 			closeNav();
-			openLeadModal(trigger);
+			openOfferModal(trigger);
 		});
 	});
 
-	leadCloseTargets.forEach((target) => {
-		target.addEventListener('click', () => closeLeadModal());
+	offerCloseTargets.forEach((target) => {
+		target.addEventListener('click', () => closeOfferModal());
+	});
+
+	offerLeadTriggers.forEach((trigger) => {
+		trigger.addEventListener('click', () => {
+			closeOfferModal();
+			if (typeof window.openLeadModal === 'function') {
+				window.openLeadModal(trigger);
+			}
+		});
 	});
 
 	window.addEventListener('keydown', (event) => {
 		if (event.key === 'Escape' && siteNav.classList.contains('is-open')) {
 			closeNav();
 		}
-		if (event.key === 'Escape' && leadModal && !leadModal.hidden) {
-			closeLeadModal();
+		if (event.key === 'Escape' && offerModal && !offerModal.hidden) {
+			closeOfferModal();
 		}
 	});
 
@@ -320,57 +319,5 @@
 			closeNav();
 		}
 		queueParallaxUpdate();
-	});
-
-	leadForm?.addEventListener('submit', async (event) => {
-		event.preventDefault();
-
-		if (!(leadForm instanceof HTMLFormElement)) return;
-
-		const formData = new FormData(leadForm);
-		const payload = new URLSearchParams({
-			firstName: String(formData.get('first_name') ?? '').trim(),
-			lastName: String(formData.get('last_name') ?? '').trim(),
-			email: String(formData.get('email') ?? '').trim(),
-			phone: String(formData.get('phone') ?? '').trim(),
-			source: String(formData.get('source') ?? '').trim(),
-			pageUrl: window.location.href,
-			pageTitle: document.title,
-			submittedAt: new Date().toISOString(),
-		});
-
-		leadError?.setAttribute('hidden', '');
-
-		if (leadSubmit instanceof HTMLButtonElement) {
-			leadSubmit.disabled = true;
-			leadSubmit.textContent = 'Sending...';
-		}
-
-		try {
-			const response = await fetch(zapierWebhookUrl, {
-				method: 'POST',
-				body: payload,
-			});
-
-			if (!response.ok) {
-				throw new Error(`Webhook request failed with ${response.status}`);
-			}
-
-			leadForm.hidden = true;
-			leadForm.setAttribute('aria-hidden', 'true');
-			leadSuccess?.removeAttribute('hidden');
-			leadForm.reset();
-			if (leadSource) {
-				leadSource.value = lastLeadTrigger?.dataset?.leadTrigger ?? '';
-			}
-		} catch (error) {
-			console.error('Lead submission failed', error);
-			leadError?.removeAttribute('hidden');
-		} finally {
-			if (leadSubmit instanceof HTMLButtonElement) {
-				leadSubmit.disabled = false;
-				leadSubmit.textContent = 'Request My Callback';
-			}
-		}
 	});
 })();

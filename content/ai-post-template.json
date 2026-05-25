@@ -1,0 +1,73 @@
+[
+  {
+    "title": "How Raleigh Small Businesses Can Use AI Without Wasting Money",
+    "slug": "how-raleigh-small-businesses-can-use-ai-without-wasting-money",
+    "excerpt": "A practical guide to using AI for follow-up, operations, and content without buying random tools.",
+    "publishedAt": "2026-05-24T09:00:00.000Z",
+    "tags": ["AI", "Small Business", "Raleigh"],
+    "bodyBlocks": [
+      {
+        "type": "block",
+        "style": "h2",
+        "spans": [
+          {
+            "text": "Why this matters"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Most small businesses do not need an AI strategy deck. They need one useful workflow that saves time or improves follow-up."
+      },
+      {
+        "type": "block",
+        "style": "normal",
+        "spans": [
+          {
+            "text": "The best place to start is usually with a repetitive process: intake, lead response, FAQ handling, or internal knowledge retrieval. If you want help figuring that out, "
+          },
+          {
+            "text": "book a Digital Gut Check",
+            "link": "/#contact"
+          },
+          {
+            "text": "."
+          }
+        ]
+      },
+      {
+        "type": "image",
+        "path": "content/images/placeholder-inline-image.png",
+        "alt": "Example inline image alt text",
+        "caption": "Optional inline image caption"
+      },
+      {
+        "type": "paragraph",
+        "text": "When the workflow is clear, AI becomes useful. When the workflow is unclear, AI usually just adds noise."
+      }
+    ],
+    "featuredImage": {
+      "path": "content/images/placeholder-featured-image.png",
+      "alt": "Example featured image alt text"
+    },
+    "schemaMarkup": "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"BlogPosting\",\n  \"headline\": \"How Raleigh Small Businesses Can Use AI Without Wasting Money\"\n}",
+    "seo": {
+      "metaTitle": "How Raleigh Small Businesses Can Use AI Without Wasting Money | Mike the Tech Ninja",
+      "metaDescription": "A practical guide for Raleigh small businesses that want useful AI workflows instead of hype.",
+      "canonicalUrl": "https://whoisthetechninja.com/blog/how-raleigh-small-businesses-can-use-ai-without-wasting-money/",
+      "noIndex": false,
+      "ogTitle": "How Raleigh Small Businesses Can Use AI Without Wasting Money",
+      "ogDescription": "Useful AI workflows for small businesses that want better follow-up and less wasted time.",
+      "ogImage": {
+        "path": "content/images/placeholder-og-image.png",
+        "alt": "Example Open Graph image alt text"
+      },
+      "twitterTitle": "How Raleigh Small Businesses Can Use AI Without Wasting Money",
+      "twitterDescription": "Practical AI ideas for small businesses.",
+      "twitterImage": {
+        "path": "content/images/placeholder-twitter-image.png",
+        "alt": "Example Twitter image alt text"
+      }
+    }
+  }
+]

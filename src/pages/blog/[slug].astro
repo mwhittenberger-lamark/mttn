@@ -1,8 +1,40 @@
 ---
 import Layout from '../../layouts/Layout.astro'
+import SiteHeader from '../../components/SiteHeader.astro'
+import SiteFooter from '../../components/SiteFooter.astro'
 import PortableText from '../../components/PortableText.astro'
 import {urlFor} from '../../lib/sanity-image'
 import {sanityClient} from 'sanity:client'
+
+const authorProfile = {
+	name: 'Mike Whittenberger',
+	role: 'Digital strategist, web developer, AI builder, and marketing consultant',
+	bio:
+		'Mike helps Triangle small businesses turn limited budgets into smarter websites, more useful AI, cleaner follow-up, and clearer digital strategy without big-agency overhead.',
+	imageSrc: '/mike-whittenberger-headshot.jpg',
+	linkedinHref: 'https://www.linkedin.com/in/michael-whittenberger-8a52016/',
+	linkedinLabel: 'Connect with Mike on LinkedIn',
+}
+
+const businessSidebar = {
+	title: 'About Mike the Tech Ninja',
+	copy:
+		'Mike the Tech Ninja helps Triangle small businesses build better websites, use practical AI, run smarter marketing, and create digital systems that actually support growth.',
+	highlights: [
+		'Local to the Triangle, remote-friendly everywhere else',
+		'Senior-level help without a bloated agency retainer',
+		'Websites, AI, SEO, paid media, email, CRO, and strategy',
+	],
+}
+
+const tuneUpOffer = {
+	title: 'Triangle Digital Tune-Up',
+	price: 'Starting at $750',
+	copy:
+		'A focused audit of your website, marketing, SEO, tracking, and AI opportunities with a prioritized action plan.',
+	ctaLabel: 'Request a Digital Tune-Up',
+	ctaHref: '/#packages',
+}
 
 export async function getStaticPaths() {
 	const slugs = await sanityClient.fetch<{slug: {current: string}}[]>(
@@ -48,6 +80,14 @@ type BlogPost = {
 			asset?: unknown
 		}
 	}
+}
+
+type RelatedPost = {
+	title: string
+	slug: {current: string}
+	excerpt: string
+	publishedAt: string
+	tags?: string[]
 }
 
 const post = slug
@@ -98,8 +138,50 @@ const formatDate = (value: string) =>
 		day: 'numeric',
 	})
 
+const flattenPortableText = (value: any[] = []) =>
+	value
+		.flatMap((block) => {
+			if (!block || typeof block !== 'object') return []
+			if (block._type !== 'block' || !Array.isArray(block.children)) return []
+			return block.children
+				.map((child: {text?: string}) => child?.text?.trim() || '')
+				.filter(Boolean)
+		})
+		.join(' ')
+
+const readingTimeMinutes = post
+	? Math.max(1, Math.ceil(flattenPortableText(post.body).split(/\s+/).filter(Boolean).length / 225))
+	: 1
+
+const relatedCandidates = post
+	? await sanityClient.fetch<RelatedPost[]>(
+			`*[_type == "post" && defined(slug.current) && slug.current != $slug] | order(publishedAt desc){
+				title,
+				slug,
+				excerpt,
+				publishedAt,
+				tags
+			}`,
+			{slug}
+		)
+	: []
+
+const relatedPosts = relatedCandidates
+	.map((entry) => {
+		const overlap = entry.tags?.filter((tag) => post?.tags?.includes(tag)).length ?? 0
+		return {
+			...entry,
+			overlap,
+		}
+	})
+	.sort((left, right) => {
+		if (right.overlap !== left.overlap) return right.overlap - left.overlap
+		return new Date(right.publishedAt).getTime() - new Date(left.publishedAt).getTime()
+	})
+	.slice(0, 3)
+
 const heroImageUrl =
-	post?.featuredImage?.asset && urlFor(post.featuredImage).width(1400).height(780).fit('crop').auto('format').url()
+	post?.featuredImage?.asset && urlFor(post.featuredImage).width(1400).fit('max').auto('format').url()
 
 const canonicalUrl = post?.seo?.canonicalUrl?.trim() || (post ? `https://whoisthetechninja.com/blog/${post.slug.current}/` : 'https://whoisthetechninja.com/blog/')
 const pageTitle = post ? post.seo?.metaTitle?.trim() || `${post.title} | Mike the Tech Ninja Blog` : 'Post Not Found | Mike the Tech Ninja'
@@ -164,45 +246,112 @@ const postStructuredData = post?.schemaMarkup?.trim() || fallbackStructuredData
 	twitterDescription={post?.seo?.twitterDescription?.trim() || post?.seo?.ogDescription?.trim() || post?.seo?.metaDescription?.trim() || post?.excerpt}
 	twitterImage={finalTwitterImage}
 >
-	<main class="post-page">
-		<div class="container">
-			{post ? (
-				<article class="post">
-					<a class="post__back" href="/blog/">Back to blog</a>
-					<header class="post__header">
-						<p class="post__meta">{formatDate(post.publishedAt)}</p>
-						<h1>{post.title}</h1>
-						<p class="post__excerpt">{post.excerpt}</p>
-						{post.tags && post.tags.length > 0 && (
-							<div class="post__tags">
-								{post.tags.map((tag) => <span>{tag}</span>)}
+	<div class="page">
+		<SiteHeader />
+		<main class="post-page">
+			<div class="container">
+				{post ? (
+					<div class="post-layout">
+						<article class="post">
+							<a class="post__back" href="/blog/">Back to blog</a>
+							<header class="post__header">
+								<div class="post__meta-row">
+									<p class="post__meta">{formatDate(post.publishedAt)}</p>
+									<p class="post__meta">{readingTimeMinutes} min read</p>
+									<p class="post__meta">By {authorProfile.name}</p>
+								</div>
+								<h1>{post.title}</h1>
+								<p class="post__excerpt">{post.excerpt}</p>
+								{post.tags && post.tags.length > 0 && (
+									<div class="post__tags">
+										{post.tags.map((tag) => <span>{tag}</span>)}
+									</div>
+								)}
+							</header>
+
+							{heroImageUrl && (
+								<img
+									class="post__hero"
+									src={heroImageUrl}
+									alt={post.featuredImage?.alt ?? post.title}
+									loading="eager"
+								/>
+							)}
+
+							<div class="post__body prose">
+								<PortableText value={post.body} />
 							</div>
-						)}
-					</header>
 
-					{heroImageUrl && (
-						<img
-							class="post__hero"
-							src={heroImageUrl}
-							alt={post.featuredImage?.alt ?? post.title}
-							loading="eager"
-						/>
-					)}
+							<section class="author-box" aria-labelledby="author-box-title">
+								<img class="author-box__image" src={authorProfile.imageSrc} alt={authorProfile.name} loading="lazy" />
+								<div class="author-box__copy">
+									<p class="author-box__eyebrow">About the author</p>
+									<h2 id="author-box-title">{authorProfile.name}</h2>
+									<p class="author-box__role">{authorProfile.role}</p>
+									<p>{authorProfile.bio}</p>
+									<a
+										class="button secondary small"
+										href={authorProfile.linkedinHref}
+										target="_blank"
+										rel="noreferrer"
+									>
+										{authorProfile.linkedinLabel}
+									</a>
+								</div>
+							</section>
+						</article>
 
-					<div class="post__body prose">
-						<PortableText value={post.body} />
+						<aside class="post-sidebar" aria-label="Article sidebar">
+							<section class="sidebar-card">
+								<p class="sidebar-card__eyebrow">Business snapshot</p>
+								<h2>{businessSidebar.title}</h2>
+								<p>{businessSidebar.copy}</p>
+								<ul class="sidebar-list">
+									{businessSidebar.highlights.map((item) => <li>{item}</li>)}
+								</ul>
+							</section>
+
+							<section class="sidebar-card sidebar-card--offer">
+								<p class="sidebar-card__eyebrow">Featured offer</p>
+								<h2>{tuneUpOffer.title}</h2>
+								<p>{tuneUpOffer.copy}</p>
+								<div class="sidebar-offer__price">{tuneUpOffer.price}</div>
+								<a class="button primary small" href={tuneUpOffer.ctaHref}>{tuneUpOffer.ctaLabel}</a>
+							</section>
+
+							{relatedPosts.length > 0 && (
+								<section class="sidebar-card">
+									<p class="sidebar-card__eyebrow">Related posts</p>
+									<h2>Keep reading</h2>
+									<div class="related-posts">
+										{relatedPosts.map((relatedPost) => (
+											<article class="related-post">
+												<p class="related-post__meta">{formatDate(relatedPost.publishedAt)}</p>
+												<h3>
+													<a href={`/blog/${relatedPost.slug.current}/`}>{relatedPost.title}</a>
+												</h3>
+												<p>{relatedPost.excerpt}</p>
+											</article>
+										))}
+									</div>
+								</section>
+							)}
+						</aside>
 					</div>
-				</article>
-			) : (
-				<section class="post-missing">
-					<h1>Post not found.</h1>
-					<p>The requested article does not exist or is not published yet.</p>
-					<a class="post__back" href="/blog/">Return to the blog</a>
-				</section>
-			)}
-		</div>
-	</main>
+				) : (
+					<section class="post-missing">
+						<h1>Post not found.</h1>
+						<p>The requested article does not exist or is not published yet.</p>
+						<a class="post__back" href="/blog/">Return to the blog</a>
+					</section>
+				)}
+			</div>
+		</main>
+		<SiteFooter />
+	</div>
 </Layout>
+
+<script src="/scripts/site-nav.js" defer></script>
 
 <style>
 	.post-page {
@@ -214,8 +363,14 @@ const postStructuredData = post?.schemaMarkup?.trim() || fallbackStructuredData
 	}
 
 	.post {
-		max-width: 900px;
-		margin: 0 auto;
+		min-width: 0;
+	}
+
+	.post-layout {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) 320px;
+		gap: 32px;
+		align-items: start;
 	}
 
 	.post__back {
@@ -232,6 +387,12 @@ const postStructuredData = post?.schemaMarkup?.trim() || fallbackStructuredData
 		gap: 16px;
 	}
 
+	.post__meta-row {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+	}
+
 	.post__meta {
 		font-family: 'Sora', 'Avenir Next', 'Segoe UI', sans-serif;
 		font-size: 0.82rem;
@@ -239,6 +400,11 @@ const postStructuredData = post?.schemaMarkup?.trim() || fallbackStructuredData
 		letter-spacing: 0.06em;
 		text-transform: uppercase;
 		color: var(--color-gray);
+	}
+
+	.post__meta:not(:last-child)::after {
+		content: '•';
+		margin-left: 10px;
 	}
 
 	.post__header h1 {
@@ -270,7 +436,8 @@ const postStructuredData = post?.schemaMarkup?.trim() || fallbackStructuredData
 		width: 100%;
 		margin-top: 28px;
 		border-radius: 28px;
-		object-fit: cover;
+		height: auto;
+		display: block;
 		box-shadow: 0 24px 60px rgba(11, 11, 11, 0.12);
 	}
 
@@ -281,6 +448,123 @@ const postStructuredData = post?.schemaMarkup?.trim() || fallbackStructuredData
 		border-radius: 24px;
 		background: rgba(255, 255, 255, 0.88);
 		box-shadow: 0 18px 42px rgba(11, 11, 11, 0.06);
+	}
+
+	.author-box,
+	.sidebar-card {
+		border: 1px solid var(--color-border);
+		border-radius: 24px;
+		background: rgba(255, 255, 255, 0.92);
+		box-shadow: 0 18px 42px rgba(11, 11, 11, 0.06);
+	}
+
+	.author-box {
+		display: grid;
+		grid-template-columns: 120px minmax(0, 1fr);
+		gap: 22px;
+		margin-top: 28px;
+		padding: 24px;
+	}
+
+	.author-box__image {
+		width: 120px;
+		height: 120px;
+		padding: 16px;
+		border-radius: 24px;
+		background: linear-gradient(180deg, #ffffff, #eef3ff);
+		object-fit: contain;
+	}
+
+	.author-box__copy {
+		display: grid;
+		gap: 10px;
+	}
+
+	.author-box__eyebrow,
+	.sidebar-card__eyebrow {
+		font-family: 'Sora', 'Avenir Next', 'Segoe UI', sans-serif;
+		font-size: 0.8rem;
+		font-weight: 600;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		color: var(--color-blue);
+	}
+
+	.author-box__role {
+		font-weight: 600;
+		color: var(--color-black);
+	}
+
+	.post-sidebar {
+		position: sticky;
+		top: 108px;
+		display: grid;
+		gap: 18px;
+	}
+
+	.sidebar-card {
+		padding: 22px;
+	}
+
+	.sidebar-card h2 {
+		margin-top: 10px;
+		font-size: 1.35rem;
+		line-height: 1.15;
+	}
+
+	.sidebar-card p + p,
+	.sidebar-card p + ul,
+	.sidebar-card p + div {
+		margin-top: 14px;
+	}
+
+	.sidebar-list {
+		display: grid;
+		gap: 10px;
+		padding-left: 18px;
+	}
+
+	.sidebar-offer__price {
+		margin: 16px 0 18px;
+		font-family: 'Sora', 'Avenir Next', 'Segoe UI', sans-serif;
+		font-size: 1.45rem;
+		font-weight: 700;
+		color: var(--color-blue);
+	}
+
+	.related-posts {
+		display: grid;
+		gap: 16px;
+		margin-top: 16px;
+	}
+
+	.related-post:not(:last-child) {
+		padding-bottom: 16px;
+		border-bottom: 1px solid rgba(11, 11, 11, 0.08);
+	}
+
+	.related-post__meta {
+		font-family: 'Sora', 'Avenir Next', 'Segoe UI', sans-serif;
+		font-size: 0.74rem;
+		font-weight: 600;
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+		color: var(--color-gray);
+	}
+
+	.related-post h3 {
+		margin-top: 8px;
+		font-size: 1.02rem;
+		line-height: 1.2;
+	}
+
+	.related-post h3 a:hover {
+		color: var(--color-blue);
+	}
+
+	.related-post p:last-child {
+		margin-top: 8px;
+		font-size: 0.98rem;
 	}
 
 	.prose :global(h2),
@@ -333,6 +617,27 @@ const postStructuredData = post?.schemaMarkup?.trim() || fallbackStructuredData
 	@media (max-width: 700px) {
 		.post-page {
 			padding-top: 40px;
+		}
+
+		.post-layout {
+			grid-template-columns: 1fr;
+		}
+
+		.post__meta:not(:last-child)::after {
+			display: none;
+		}
+
+		.author-box {
+			grid-template-columns: 1fr;
+		}
+
+		.author-box__image {
+			width: 96px;
+			height: 96px;
+		}
+
+		.post-sidebar {
+			position: static;
 		}
 
 		.post__body {

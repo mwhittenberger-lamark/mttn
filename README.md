@@ -10,6 +10,7 @@ Astro marketing site with a Sanity Studio for blog content.
 - `npm run studio:build` builds the Sanity Studio
 - `npm run sanity:create-post -- --title "..." --excerpt "..." --body "..."` creates a Sanity post with the write token from `.env`
 - `npm run sanity:import-posts -- --file content/posts.example.json` imports multiple Sanity posts from JSON
+- `npm run sanity:update-posts -- --file content/posts.example.json` updates existing Sanity posts by slug
 
 ## Sanity env setup
 
@@ -111,3 +112,67 @@ Notes:
 - `seo` maps to the post SEO fields in the Sanity Studio
 
 You can still keep refining content in the Sanity Studio after import.
+
+## Update existing posts in Sanity
+
+Use the same JSON shape as the importer, but make sure each post includes the slug of the existing post you want to update:
+
+```bash
+npm run sanity:update-posts -- --file content/seven-website-must-haves.json
+```
+
+Behavior:
+
+- matches existing posts by `slug`
+- replaces the matched Sanity document with the JSON content
+- fails if no post exists for that slug
+
+If you want the updater to create missing posts too:
+
+```bash
+npm run sanity:update-posts -- --file content/posts.json --create-if-missing
+```
+
+Recommended workflow:
+
+1. Validate the JSON
+2. Run the update command
+3. Review the post in the Sanity Studio
+
+## AI to JSON workflow
+
+If you want an AI to write a post in import-ready JSON:
+
+1. Open `prompts/ai-blog-json-prompt.md`
+2. Replace:
+   - `TOPIC_GOES_HERE`
+   - `TARGET_KEYWORD_GOES_HERE`
+   - `ANGLE_GOES_HERE`
+3. Paste the prompt into ChatGPT or another model
+4. Save the returned JSON to a file such as `content/ai-post.json`
+5. Validate it:
+
+```bash
+npm run sanity:validate-posts -- --file content/ai-post.json
+```
+
+6. Import it:
+
+```bash
+npm run sanity:import-posts -- --file content/ai-post.json
+```
+
+Reference files:
+
+- `prompts/ai-blog-json-prompt.md` gives the AI strict output instructions
+- `content/ai-post-template.json` is a ready-to-copy import template
+- `content/images/placeholder-*.png` are bundled starter images so the template validates immediately
+
+Recommended workflow:
+
+- Generate the JSON with the AI
+- Run the validator
+- Quickly sanity-check title, slug, excerpt, and SEO fields
+- Add real image files under `content/images/` if the JSON references them
+- Run the importer
+- Review the post in the Sanity Studio

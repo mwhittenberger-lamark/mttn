@@ -15,7 +15,9 @@
     "studio": "npm --prefix studio-mike-the-tech-ninja run dev",
     "studio:build": "npm --prefix studio-mike-the-tech-ninja run build",
     "sanity:create-post": "node scripts/create-sanity-post.mjs",
-    "sanity:import-posts": "node scripts/import-sanity-posts.mjs"
+    "sanity:import-posts": "node scripts/import-sanity-posts.mjs",
+    "sanity:update-posts": "node scripts/update-sanity-posts.mjs",
+    "sanity:validate-posts": "node scripts/validate-ai-post-json.mjs"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^13.5.4",

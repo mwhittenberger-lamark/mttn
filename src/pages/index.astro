@@ -93,33 +93,70 @@ const cities = ['Raleigh', 'Durham', 'Chapel Hill', 'Cary', 'Apex'];
 
 const packages = [
 	{
+		id: 'digital-gut-check',
 		title: 'Free Digital Gut Check',
 		description:
 			'A short call where we talk through your business, your current digital setup, and where you may be leaving opportunities on the table.',
 		price: 'Free',
 		cta: 'Get Started',
 		highlighted: false,
+		eyebrow: 'Low-pressure first step',
+		bestFor: 'Best for businesses that know something is off but are not sure what to fix first.',
+		includes: [
+			'A practical conversation about your website, marketing, follow-up, and current bottlenecks',
+			'2-3 clear opportunities to focus on next',
+			'A recommendation on whether you need a quick fix, an audit, or a larger build',
+		],
+		outcome: 'You leave with clarity on the smartest next digital move, whether we work together or not.',
 	},
 	{
+		id: 'triangle-digital-tune-up',
 		title: 'Triangle Digital Tune-Up',
 		description: 'A review of your digital presence with practical recommendations.',
 		price: 'Starting at $750',
 		cta: 'Learn More',
 		highlighted: false,
+		eyebrow: 'Focused audit',
+		bestFor: 'Best for businesses that want a senior-level review before spending more on redesigns, SEO, ads, or AI.',
+		includes: [
+			'Website and messaging review',
+			'SEO visibility and paid-media readiness check',
+			'Tracking, conversion, and AI opportunity review',
+			'A prioritized action plan you can use immediately',
+		],
+		outcome: 'You get a practical roadmap for what to tighten, what to stop ignoring, and what to do next.',
 	},
 	{
+		id: 'small-business-growth-sprint',
 		title: 'Small Business Growth Sprint',
 		description: 'Focused 4-6 week sprint to fix, launch, or improve one high-impact area.',
 		price: 'Starting at $2,500',
 		cta: 'Learn More',
 		highlighted: true,
+		eyebrow: 'Short project engagement',
+		bestFor: 'Best for businesses that already know the bottleneck and want one important thing shipped well.',
+		includes: [
+			'A clear sprint scope around one growth bottleneck',
+			'Hands-on build or implementation work',
+			'Feedback, refinement, and launch support',
+		],
+		outcome: 'You get one meaningful improvement live fast instead of another month of indecision.',
 	},
 	{
+		id: 'fractional-digital-partner',
 		title: 'Fractional Digital Partner',
-		description: 'Ongoing strategic and execution support without the full-time price.',
-		price: 'Starting at $1,750/mo',
+		description: 'Ongoing web, email, and paid media support with strategic guidance without the full-time price.',
+		price: 'Starting at $1,250/mo',
 		cta: 'Learn More',
 		highlighted: false,
+		eyebrow: 'Ongoing partnership',
+		bestFor: 'Best for businesses that need regular senior digital help without hiring in-house or signing a giant agency retainer.',
+		includes: [
+			'Strategic guidance across website, marketing, automation, and analytics',
+			'Ongoing implementation support on the priorities that matter most',
+			'A flexible partner who can connect the moving pieces over time',
+		],
+		outcome: 'You get continuity, faster decisions, and execution support without carrying a full-time salary.',
 	},
 ];
 
@@ -181,7 +218,7 @@ const socialLinks = [
 	},
 	{
 		label: 'LinkedIn',
-		href: '#',
+		href: 'https://www.linkedin.com/in/michael-whittenberger-8a52016/',
 		icon: 'linkedin',
 	},
 	{
@@ -384,7 +421,7 @@ const structuredData = String.raw`{
         ]
       },
       "sameAs": [
-        "https://www.linkedin.com/in/YOUR_PROFILE_HERE",
+        "https://www.linkedin.com/in/michael-whittenberger-8a52016/",
         "https://www.facebook.com/YOUR_PROFILE_HERE",
         "https://www.instagram.com/YOUR_PROFILE_HERE"
       ]
@@ -669,6 +706,9 @@ const structuredData = String.raw`{
 						<span>Mike the Tech Ninja</span>
 					</a>
 
+					<a class="button primary small nav-mobile-consult" href="#contact" data-lead-trigger="Nav CTA">
+						Free Consult
+					</a>
 					<button
 						class="nav-toggle"
 						type="button"
@@ -684,10 +724,9 @@ const structuredData = String.raw`{
 					<div class="nav-links" id="primary-nav">
 						{navItems.map((item) => <a href={item.href}>{item.label}</a>)}
 						<a class="button primary small nav-links__cta" href="#contact" data-lead-trigger="Nav CTA">
-							Book a Free Digital Gut Check
+							Free Consult
 						</a>
 					</div>
-
 					<a class="button primary small" href="#contact" data-lead-trigger="Nav CTA">Book a Free Digital Gut Check</a>
 				</div>
 			</nav>
@@ -950,9 +989,13 @@ const structuredData = String.raw`{
 								<h3>{pkg.title}</h3>
 								<p>{pkg.description}</p>
 								<div class="package-price">{pkg.price}</div>
-									<a class:list={['button', pkg.highlighted ? 'primary' : 'secondary', 'small']} href="#contact" data-lead-trigger={pkg.title}>
+									<button
+										class:list={['button', pkg.highlighted ? 'primary' : 'secondary', 'small']}
+										type="button"
+										data-offer-trigger={pkg.id}
+									>
 										{pkg.cta}
-									</a>
+									</button>
 							</article>
 						))}
 					</div>
@@ -967,8 +1010,9 @@ const structuredData = String.raw`{
 					<div class="about-copy">
 						<h2>Meet Mike, your local Tech Ninja</h2>
 						<p>
-							I have spent my career building websites, digital tools, marketing systems, and AI-powered
-							solutions for businesses that need the web to do more than simply exist.
+							I have been doing this for over 20 years, building websites, digital tools, marketing
+							systems, and AI-powered solutions for businesses that need the web to do more than simply
+							exist.
 						</p>
 						<p>
 							My background spans web development, custom AI, apps, lifecycle and email marketing, paid media,
@@ -978,7 +1022,7 @@ const structuredData = String.raw`{
 							If you are in the Triangle, I can work with you remotely or meet in person to understand your
 							business, your customers, and the opportunities hiding in plain sight.
 						</p>
-							<a class="button primary about-cta" href="#contact" data-lead-trigger="About CTA">Let's Talk About What's Possible</a>
+						<a class="button primary about-cta" href="#contact" data-lead-trigger="About CTA">Let's Talk About What's Possible</a>
 					</div>
 				</div>
 			</section>
@@ -1011,60 +1055,48 @@ const structuredData = String.raw`{
 				</section>
 			</main>
 
-			<div class="lead-modal" id="lead-modal" hidden>
-				<div class="lead-modal__backdrop" data-lead-close></div>
+			<div class="offer-modal" id="offer-modal" hidden>
+				<div class="offer-modal__backdrop" data-offer-close></div>
 				<div
-					class="lead-modal__dialog"
+					class="offer-modal__dialog"
 					role="dialog"
 					aria-modal="true"
-					aria-labelledby="lead-modal-title"
+					aria-label="Offer details"
 				>
-					<button class="lead-modal__close" type="button" aria-label="Close form" data-lead-close>
+					<button class="offer-modal__close" type="button" aria-label="Close offer details" data-offer-close>
 						<span></span>
 						<span></span>
 					</button>
-					<div class="lead-modal__content">
-						<p class="lead-modal__eyebrow">Let's talk</p>
-						<h2 id="lead-modal-title">Let's Talk About What's Possible</h2>
-						<p class="lead-modal__copy">
-							Share a few details and I will reach out to talk through the smartest next move for your
-							business.
-						</p>
-						<form class="lead-form" id="lead-form">
-							<input type="hidden" name="source" id="lead-source" value="" />
-							<div class="lead-form__grid">
-								<label>
-									<span>First name</span>
-									<input type="text" name="first_name" autocomplete="given-name" required />
-								</label>
-								<label>
-									<span>Last name</span>
-									<input type="text" name="last_name" autocomplete="family-name" required />
-								</label>
-							</div>
-							<label>
-								<span>Email</span>
-								<input type="email" name="email" autocomplete="email" required />
-							</label>
-							<label>
-								<span>Phone</span>
-								<input type="tel" name="phone" autocomplete="tel" required />
-							</label>
-							<button class="button primary lead-form__submit" type="submit">Request My Callback</button>
-							<p class="lead-form__note">Required: first and last name, email, and phone.</p>
-							<p class="lead-form__error" id="lead-error" hidden>
-								That did not go through. Please try again in a moment.
-							</p>
-						</form>
-						<div class="lead-success-card" id="lead-success" hidden>
-							<p class="lead-success-card__eyebrow">Request received</p>
-							<h3>Thanks. Your Digital Gut Check request is in.</h3>
-							<p>
-								I have your details and will follow up soon to talk through the smartest next move for
-								your business.
-							</p>
-							<button class="button primary" type="button" data-lead-close>Close</button>
-						</div>
+					<div class="offer-modal__panels">
+						{packages.map((pkg) => (
+							<section class="offer-panel" data-offer-panel={pkg.id} hidden>
+								<p class="offer-panel__eyebrow">{pkg.eyebrow}</p>
+								<h2>{pkg.title}</h2>
+								<p class="offer-panel__price">{pkg.price}</p>
+								<p class="offer-panel__description">{pkg.description}</p>
+								<p class="offer-panel__best-for">{pkg.bestFor}</p>
+								<div class="offer-panel__body">
+									<div>
+										<h3>What is included</h3>
+										<ul class="offer-panel__list">
+											{pkg.includes.map((item) => <li>{item}</li>)}
+										</ul>
+									</div>
+									<div class="offer-panel__outcome">
+										<h3>Outcome</h3>
+										<p>{pkg.outcome}</p>
+									</div>
+								</div>
+								<div class="offer-panel__actions">
+									<button class="button primary" type="button" data-offer-lead-trigger={pkg.title}>
+										{pkg.id === 'triangle-digital-tune-up' ? 'Request a Digital Tune-Up' : 'Let’s Talk About This Offer'}
+									</button>
+									<button class="button secondary small" type="button" data-offer-close>
+										Keep Browsing
+									</button>
+								</div>
+							</section>
+						))}
 					</div>
 				</div>
 			</div>
@@ -1080,7 +1112,12 @@ const structuredData = String.raw`{
 					</div>
 					<div class="footer-socials">
 						{socialLinks.map((link) => (
-							<a href={link.href} aria-label={link.label}>
+							<a
+								href={link.href}
+								aria-label={link.label}
+								target={link.href.startsWith('http') ? '_blank' : undefined}
+								rel={link.href.startsWith('http') ? 'noreferrer' : undefined}
+							>
 								{link.icon === 'twitter' && (
 									<svg viewBox="0 0 24 24" aria-hidden="true">
 										<path d="M23 3a10.9 10.9 0 0 1-3.14 1.53A4.48 4.48 0 0 0 12 7.53v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>

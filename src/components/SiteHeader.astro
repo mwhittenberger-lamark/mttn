@@ -1,0 +1,41 @@
+---
+const logoSrc = '/mike%20the%20tech%20ninja%20logo%202026.png'
+
+const navItems = [
+	{label: 'Services', href: '/#services'},
+	{label: 'How It Works', href: '/#how-it-works'},
+	{label: 'Packages', href: '/#packages'},
+	{label: 'Blog', href: '/blog/'},
+	{label: 'FAQ', href: '/#faq'},
+]
+---
+
+<nav class="site-nav" id="site-nav">
+	<div class="container nav-inner">
+		<a class="brand" href="/">
+			<img src={logoSrc} alt="Mike the Tech Ninja" />
+			<span>Mike the Tech Ninja</span>
+		</a>
+
+		<a class="button primary small nav-mobile-consult" href="/#contact">Free Consult</a>
+		<button
+			class="nav-toggle"
+			type="button"
+			aria-expanded="false"
+			aria-controls="primary-nav"
+			aria-label="Open navigation menu"
+		>
+			<span></span>
+			<span></span>
+			<span></span>
+		</button>
+
+		<div class="nav-links" id="primary-nav">
+			{navItems.map((item) => <a href={item.href}>{item.label}</a>)}
+			<a class="button primary small nav-links__cta" href="/#contact">
+				Free Consult
+			</a>
+		</div>
+		<a class="button primary small" href="/#contact">Book a Free Digital Gut Check</a>
+	</div>
+</nav>

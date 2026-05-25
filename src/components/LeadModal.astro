@@ -1,0 +1,57 @@
+<div class="lead-modal" id="lead-modal" hidden>
+	<div class="lead-modal__backdrop" data-lead-close></div>
+	<div
+		class="lead-modal__dialog"
+		role="dialog"
+		aria-modal="true"
+		aria-labelledby="lead-modal-title"
+	>
+		<button class="lead-modal__close" type="button" aria-label="Close form" data-lead-close>
+			<span></span>
+			<span></span>
+		</button>
+		<div class="lead-modal__content">
+			<p class="lead-modal__eyebrow">Let's talk</p>
+			<h2 id="lead-modal-title">Let's Talk About What's Possible</h2>
+			<p class="lead-modal__copy">
+				Share a few details and I will reach out to talk through the smartest next move for your
+				business.
+			</p>
+			<form class="lead-form" id="lead-form">
+				<input type="hidden" name="source" id="lead-source" value="" />
+				<div class="lead-form__grid">
+					<label>
+						<span>First name</span>
+						<input type="text" name="first_name" autocomplete="given-name" required />
+					</label>
+					<label>
+						<span>Last name</span>
+						<input type="text" name="last_name" autocomplete="family-name" required />
+					</label>
+				</div>
+				<label>
+					<span>Email</span>
+					<input type="email" name="email" autocomplete="email" required />
+				</label>
+				<label>
+					<span>Phone</span>
+					<input type="tel" name="phone" autocomplete="tel" required />
+				</label>
+				<button class="button primary lead-form__submit" type="submit">Request My Callback</button>
+				<p class="lead-form__note">Required: first and last name, email, and phone.</p>
+				<p class="lead-form__error" id="lead-error" hidden>
+					That did not go through. Please try again in a moment.
+				</p>
+			</form>
+			<div class="lead-success-card" id="lead-success" hidden>
+				<p class="lead-success-card__eyebrow">Request received</p>
+				<h3>Thanks. Your Digital Gut Check request is in.</h3>
+				<p>
+					I have your details and will follow up soon to talk through the smartest next move for
+					your business.
+				</p>
+				<button class="button primary" type="button" data-lead-close>Close</button>
+			</div>
+		</div>
+	</div>
+</div>
