@@ -1,8 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import SiteFooter from '../components/SiteFooter.astro';
 
 const logoSrc = '/mike%20the%20tech%20ninja%20logo%202026.png';
-const currentYear = new Date().getFullYear();
 
 const fixes = [
 	'A clearer homepage',
@@ -411,13 +411,7 @@ const structuredData = JSON.stringify({
 			</section>
 		</main>
 
-		<footer class="landing-footer">
-			<div class="container landing-footer__inner">
-				<p>Mike the Tech Ninja</p>
-				<p>Websites, AI, SEO, paid media, email marketing, CRO, and strategy for Triangle small businesses.</p>
-				<p>&copy; {currentYear} Mike the Tech Ninja. All rights reserved.</p>
-			</div>
-		</footer>
+		<SiteFooter />
 	</div>
 
 	<script src="/scripts/paid-landing.js" defer></script>
@@ -1046,11 +1040,6 @@ const structuredData = JSON.stringify({
 		line-height: 1.65;
 	}
 
-	.landing-footer {
-		border-top: 1px solid var(--color-border);
-		background: rgba(255, 255, 255, 0.9);
-	}
-
 	.landing-shell .button.secondary {
 		border-color: rgba(163, 230, 53, 0.45);
 		color: #365314;
@@ -1061,15 +1050,6 @@ const structuredData = JSON.stringify({
 	.landing-shell .button.secondary:hover {
 		border-color: rgba(132, 204, 22, 0.52);
 		background: linear-gradient(180deg, rgba(217, 249, 157, 0.94), rgba(255, 255, 255, 0.98));
-	}
-
-	.landing-footer__inner {
-		display: flex;
-		justify-content: space-between;
-		gap: 20px;
-		padding: 20px 24px 30px;
-		font-size: 0.9rem;
-		color: #475569;
 	}
 
 	@media (max-width: 900px) {
@@ -1109,11 +1089,6 @@ const structuredData = JSON.stringify({
 			font-size: 0.78rem;
 			letter-spacing: 0.01em;
 			white-space: nowrap;
-		}
-
-		.landing-footer__inner {
-			flex-direction: column;
-			align-items: flex-start;
 		}
 
 		.gut-hero {
