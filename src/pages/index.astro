@@ -1052,10 +1052,19 @@ const structuredData = String.raw`{
 							</label>
 							<button class="button primary lead-form__submit" type="submit">Request My Callback</button>
 							<p class="lead-form__note">Required: first and last name, email, and phone.</p>
-							<p class="lead-form__success" id="lead-success" hidden>
-								Thanks. Your request is captured and ready for follow-up.
+							<p class="lead-form__error" id="lead-error" hidden>
+								That did not go through. Please try again in a moment.
 							</p>
 						</form>
+						<div class="lead-success-card" id="lead-success" hidden>
+							<p class="lead-success-card__eyebrow">Request received</p>
+							<h3>Thanks. Your Digital Gut Check request is in.</h3>
+							<p>
+								I have your details and will follow up soon to talk through the smartest next move for
+								your business.
+							</p>
+							<button class="button primary" type="button" data-lead-close>Close</button>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -1114,7 +1123,10 @@ const structuredData = String.raw`{
 	const leadForm = document.querySelector('#lead-form');
 	const leadSource = document.querySelector('#lead-source');
 	const leadSuccess = document.querySelector('#lead-success');
+	const leadError = document.querySelector('#lead-error');
+	const leadSubmit = document.querySelector('.lead-form__submit');
 	const leadTriggers = document.querySelectorAll('[data-lead-trigger]');
+	const zapierWebhookUrl = 'https://hooks.zapier.com/hooks/catch/21390310/4oe12xb/';
 	const leadCloseTargets = document.querySelectorAll('[data-lead-close]');
 	let lastLeadTrigger = null;
 
@@ -1148,9 +1160,22 @@ const structuredData = String.raw`{
 		closeNav();
 	};
 
+	const resetLeadFeedback = () => {
+		if (!(leadForm instanceof HTMLFormElement)) return;
+		leadForm.hidden = false;
+		leadForm.removeAttribute('aria-hidden');
+		leadSuccess?.setAttribute('hidden', '');
+		leadError?.setAttribute('hidden', '');
+		if (leadSubmit instanceof HTMLButtonElement) {
+			leadSubmit.disabled = false;
+			leadSubmit.textContent = 'Request My Callback';
+		}
+	};
+
 	const openLeadModal = (trigger) => {
 		if (!leadModal) return;
 		lastLeadTrigger = trigger ?? null;
+		resetLeadFeedback();
 		if (leadSource && trigger?.dataset.leadTrigger) {
 			leadSource.value = trigger.dataset.leadTrigger;
 		}
@@ -1205,12 +1230,55 @@ const structuredData = String.raw`{
 		}
 	});
 
-	leadForm?.addEventListener('submit', (event) => {
+	leadForm?.addEventListener('submit', async (event) => {
 		event.preventDefault();
-		leadSuccess?.removeAttribute('hidden');
-		leadForm.reset();
-		if (leadSource) {
-			leadSource.value = lastLeadTrigger?.dataset?.leadTrigger ?? '';
+
+		if (!(leadForm instanceof HTMLFormElement)) return;
+
+		const formData = new FormData(leadForm);
+		const payload = new URLSearchParams({
+			firstName: String(formData.get('first_name') ?? '').trim(),
+			lastName: String(formData.get('last_name') ?? '').trim(),
+			email: String(formData.get('email') ?? '').trim(),
+			phone: String(formData.get('phone') ?? '').trim(),
+			source: String(formData.get('source') ?? '').trim(),
+			pageUrl: window.location.href,
+			pageTitle: document.title,
+			submittedAt: new Date().toISOString(),
+		});
+
+		leadError?.setAttribute('hidden', '');
+
+		if (leadSubmit instanceof HTMLButtonElement) {
+			leadSubmit.disabled = true;
+			leadSubmit.textContent = 'Sending...';
+		}
+
+		try {
+			const response = await fetch(zapierWebhookUrl, {
+				method: 'POST',
+				body: payload,
+			});
+
+			if (!response.ok) {
+				throw new Error(`Webhook request failed with ${response.status}`);
+			}
+
+			leadForm.hidden = true;
+			leadForm.setAttribute('aria-hidden', 'true');
+			leadSuccess?.removeAttribute('hidden');
+			leadForm.reset();
+			if (leadSource) {
+				leadSource.value = lastLeadTrigger?.dataset?.leadTrigger ?? '';
+			}
+		} catch (error) {
+			console.error('Lead submission failed', error);
+			leadError?.removeAttribute('hidden');
+		} finally {
+			if (leadSubmit instanceof HTMLButtonElement) {
+				leadSubmit.disabled = false;
+				leadSubmit.textContent = 'Request My Callback';
+			}
 		}
 	});
 </script>
@@ -2293,7 +2361,7 @@ const structuredData = String.raw`{
 	}
 
 	.lead-form__note,
-	.lead-form__success {
+	.lead-form__error {
 		font-size: 0.95rem;
 	}
 
@@ -2301,12 +2369,46 @@ const structuredData = String.raw`{
 		color: var(--color-gray);
 	}
 
-	.lead-form__success {
+	.lead-form__error {
 		padding: 12px 14px;
-		border: 1px solid rgba(37, 99, 235, 0.16);
+		border: 1px solid rgba(220, 38, 38, 0.14);
 		border-radius: 12px;
-		background: rgba(37, 99, 235, 0.08);
+		background: rgba(220, 38, 38, 0.07);
 		color: var(--color-black);
+	}
+
+	.lead-form__submit:disabled {
+		cursor: wait;
+		opacity: 0.78;
+		transform: none;
+	}
+
+	.lead-success-card {
+		display: grid;
+		gap: 14px;
+		margin-top: 22px;
+		padding: 24px;
+		padding: 12px 14px;
+		border: 1px solid rgba(37, 99, 235, 0.14);
+		border-radius: 20px;
+		background:
+			linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(77, 163, 217, 0.08)),
+			rgba(255, 255, 255, 0.96);
+		box-shadow: 0 18px 38px rgba(37, 99, 235, 0.08);
+		color: var(--color-black);
+	}
+
+	.lead-success-card__eyebrow {
+		font-family: 'Sora', sans-serif;
+		font-size: 0.82rem;
+		font-weight: 600;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		color: var(--color-blue);
+	}
+
+	.lead-success-card h3 {
+		font-size: 1.5rem;
 	}
 
 	.site-footer {
