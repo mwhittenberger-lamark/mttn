@@ -2,10 +2,12 @@ import type { APIRoute } from 'astro';
 
 export const prerender = false;
 
-const TWILIO_ACCOUNT_SID = import.meta.env.TWILIO_ACCOUNT_SID;
-const TWILIO_AUTH_TOKEN = import.meta.env.TWILIO_AUTH_TOKEN;
-const TWILIO_FROM_NUMBER = import.meta.env.TWILIO_FROM_NUMBER;
-const TWILIO_TO_NUMBER = import.meta.env.TWILIO_TO_NUMBER || '+16465301840';
+const TWILIO_ACCOUNT_SID = import.meta.env.TWILIO_ACCOUNT_SID?.trim();
+const TWILIO_AUTH_TOKEN = import.meta.env.TWILIO_AUTH_TOKEN?.trim();
+const TWILIO_API_KEY_SID = import.meta.env.TWILIO_API_KEY_SID?.trim();
+const TWILIO_API_KEY_SECRET = import.meta.env.TWILIO_API_KEY_SECRET?.trim();
+const TWILIO_FROM_NUMBER = import.meta.env.TWILIO_FROM_NUMBER?.trim();
+const TWILIO_TO_NUMBER = import.meta.env.TWILIO_TO_NUMBER?.trim() || '+16465301840';
 
 const json = (body: Record<string, unknown>, status = 200) =>
 	new Response(JSON.stringify(body), {
@@ -64,9 +66,66 @@ const buildMessageBody = (payload: Record<string, unknown>) => {
 	return [`New lead from ${source}`, ...knownLines, ...extraLines].join('\n');
 };
 
+const isTwilioAccountSid = (value?: string) => Boolean(value && /^AC[0-9a-fA-F]{32}$/.test(value));
+
+const isTwilioApiKeySid = (value?: string) => Boolean(value && /^SK[0-9a-fA-F]{32}$/.test(value));
+
+const encodeBasicAuth = (username: string, password: string) => btoa(`${username}:${password}`);
+
+const getTwilioConfig = () => {
+	if (!TWILIO_FROM_NUMBER) {
+		return { error: 'TWILIO_FROM_NUMBER is missing.' };
+	}
+
+	if (!TWILIO_ACCOUNT_SID) {
+		return { error: 'TWILIO_ACCOUNT_SID is missing.' };
+	}
+
+	if (!isTwilioAccountSid(TWILIO_ACCOUNT_SID)) {
+		if (isTwilioApiKeySid(TWILIO_ACCOUNT_SID) && !TWILIO_API_KEY_SID) {
+			return {
+				error:
+					'TWILIO_ACCOUNT_SID must be the AC-prefixed account SID. Move the SK-prefixed value to TWILIO_API_KEY_SID.',
+			};
+		}
+
+		return { error: 'TWILIO_ACCOUNT_SID must be an AC-prefixed account SID.' };
+	}
+
+	if (TWILIO_API_KEY_SID || TWILIO_API_KEY_SECRET) {
+		if (!TWILIO_API_KEY_SID || !TWILIO_API_KEY_SECRET) {
+			return {
+				error: 'TWILIO_API_KEY_SID and TWILIO_API_KEY_SECRET must both be set together.',
+			};
+		}
+
+		if (!isTwilioApiKeySid(TWILIO_API_KEY_SID)) {
+			return { error: 'TWILIO_API_KEY_SID must be an SK-prefixed API key SID.' };
+		}
+
+		return {
+			accountSid: TWILIO_ACCOUNT_SID,
+			authorization: `Basic ${encodeBasicAuth(TWILIO_API_KEY_SID, TWILIO_API_KEY_SECRET)}`,
+		};
+	}
+
+	if (!TWILIO_AUTH_TOKEN) {
+		return {
+			error: 'TWILIO_AUTH_TOKEN is missing. Set it, or configure TWILIO_API_KEY_SID and TWILIO_API_KEY_SECRET.',
+		};
+	}
+
+	return {
+		accountSid: TWILIO_ACCOUNT_SID,
+		authorization: `Basic ${encodeBasicAuth(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)}`,
+	};
+};
+
 export const POST: APIRoute = async ({ request }) => {
-	if (!TWILIO_ACCOUNT_SID || !TWILIO_AUTH_TOKEN || !TWILIO_FROM_NUMBER) {
-		console.error('Twilio env vars are missing.');
+	const twilioConfig = getTwilioConfig();
+
+	if ('error' in twilioConfig) {
+		console.error('Twilio env vars are invalid.', twilioConfig.error);
 		return json(
 			{
 				ok: false,
@@ -114,11 +173,11 @@ export const POST: APIRoute = async ({ request }) => {
 
 	try {
 		const response = await fetch(
-			`https://api.twilio.com/2010-04-01/Accounts/${TWILIO_ACCOUNT_SID}/Messages.json`,
+			`https://api.twilio.com/2010-04-01/Accounts/${twilioConfig.accountSid}/Messages.json`,
 			{
 				method: 'POST',
 				headers: {
-					Authorization: `Basic ${btoa(`${TWILIO_ACCOUNT_SID}:${TWILIO_AUTH_TOKEN}`)}`,
+					Authorization: twilioConfig.authorization,
 					'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
 				},
 				body: twilioBody.toString(),
